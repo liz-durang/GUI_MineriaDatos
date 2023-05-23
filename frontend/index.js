@@ -1,1 +1,1 @@
-asdfghj
+console.log("Hello World")
