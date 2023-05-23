@@ -2,6 +2,34 @@
 
 GUI de proposito general para Mineria de Datos
 
+## Getting Started
+
+Clonar el repositorio 
+
+```bash
+git clone https://github.com/liiz-durang/GUI_MineriaDatos.git
+```
+
+## Instalar el Frontend
+Esta app usa React.
+Para hacer uso de esta se debe levantar un ambiente virtual con las bibliotecas necesarias.
+
+```bash
+npm install
+```
+
+Iniciar el servidor local 
+
+```bash
+npm start
+```
+
+Navegar al servidor local 
+
+```bash
+http://localhost:3000/
+```
+
 ## Instalar el Backend
 
 Esta app utiliza FastAPI para crear una REST API.
