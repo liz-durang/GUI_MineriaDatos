@@ -1,0 +1,14 @@
+.navSide{
+    width: 20%;
+    height: 85vh;
+    border-right: solid #e9ecef;
+}
+
+
+.navLink{
+    display: block;
+}
+
+.navLink:hover{
+    background-color: #e9ecef;
+}
