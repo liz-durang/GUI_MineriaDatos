@@ -2,6 +2,8 @@
     width: 20%;
     height: 85vh;
     border-right: solid #e9ecef;
+    position: sticky;
+    top: 7vh;
 }
 
 
