@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { HashRouter, Route, Routes } from 'react-router-dom';
+
+import { HomePage } from "./pages/HomePage";
+import { EdaPage } from "./pages/EdaPage";
+import { PcaPage } from "./pages/PcaPage";
+import { BosquesPage } from "./pages/BosquesPage";
+import { Menu } from "./Components/Menu";
+import { Footer } from "./Components/Footer";
+import { NavbarOff } from "./Components/NavbarOff";
+import './app.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavbarOff/>
+
+      <HashRouter>
+        <div className="content">
+          <Menu/>
+          <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/eda" element={<EdaPage/>}/>
+            <Route path="/pca" element={<PcaPage/>}/>
+            <Route path="/bosques" element={<BosquesPage/>}/>
+            <Route path="*" element={<p>404 Not Found </p>}/>
+          </Routes>
+        </div>
+          
+      </HashRouter>
+
+      <Footer/>
+    </>
   );
 }
 
