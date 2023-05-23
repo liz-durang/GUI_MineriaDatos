@@ -2,7 +2,7 @@
 export const routesApp = [
     {
       to: '/',
-      text: 'Home'
+      text: '¿Qué es Mineria de Datos?'
     },
     {
       to: '/eda',

@@ -7,13 +7,18 @@ import { GiMining } from "react-icons/gi";
 function NavbarOff() {
   return (
     <>
-        <Navbar bg="light" sticky='top'>
-          <Container>
+        <Navbar bg="light" sticky='top' className='px-4'>
             <Navbar.Brand href="/">
-              <GiMining className='pe-1'/>
-              Mineria de Datos
+              <GiMining/>
+              <p 
+                style={{display: 'inline'}} 
+                className='ps-3'
+                >
+
+                Mineria de Datos
+
+              </p>
               </Navbar.Brand>
-          </Container>
         </Navbar>
     </>
   );
