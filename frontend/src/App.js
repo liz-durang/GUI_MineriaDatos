@@ -8,7 +8,7 @@ import { BosquesPage } from "./pages/BosquesPage";
 import { Menu } from "./Components/Menu";
 import { Footer } from "./Components/Footer";
 import { NavbarOff } from "./Components/NavbarOff";
-import './app.css';
+import './App.css';
 
 function App() {
   return (
