@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from data.pca import PCA
 from utils.helpers import dataframe_to_dict
@@ -46,6 +46,8 @@ def get_variance(n_components: int):
     """
     Regresa la matriz de covarianzas o correlaciones, y se calculan los componentes (eigen-vectores) y la varianza (eigen-valores)
     """
+    if n_components < 3:
+        raise HTTPException(status_code=400, detail="El numero de componentes debe ser mayor a 2.")
     components = pca.get_pca(n_components)
     variance, component, sum_variance = pca.get_variance()
     cum_variance = pca.get_cumulative_variance()
