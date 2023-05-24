@@ -1,5 +1,5 @@
 # Python backend
-env/
+venv/
 __pycache__/
 
 # React frontend
