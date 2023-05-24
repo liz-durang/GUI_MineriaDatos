@@ -3,6 +3,7 @@ import React from "react";
 import { PcaPaso0 } from "./Components/PcaPaso0";
 import { PcaPaso1 } from "./Components/PcaPaso1";
 import { PcaPaso2 } from "./Components/PcaPaso2";
+import { PcaPaso3y4 } from "./Components/PcaPaso3y4";
 
 function PcaPage() {
 
@@ -16,7 +17,7 @@ function PcaPage() {
         
         <hr></hr>
         <br></br>
-        <p>Con este algoritmo se intenta encontrar una estructura donde la varianza de los datos sea mayor, es decir, donde hay una mayor dispersión de éstos.</p>
+        <p>El análisis de componentes principales (ACP o PCA, Principal Component Analysis) es un algoritmo para reducir la cantidad de variables de conjuntos de datos, mientras se conserva la mayor cantidad de información posible.</p>
 
 
         <PcaPaso0/>
@@ -24,7 +25,8 @@ function PcaPage() {
         <PcaPaso1/>
         <br></br><br></br>
         <PcaPaso2/>
-      
+        <br></br><br></br>
+        <PcaPaso3y4/>
       </main>
 
     </div>

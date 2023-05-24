@@ -5,17 +5,9 @@ export const TD = styled.td`
     ${({correlation}) => {
         switch (correlation) {
             case "n01":
-                return {
-                        background: "white",
-                        color: "white"
-                        
-                        };
+                return "color: white !important";
             case "n02":
-                return {
-                        color: "white",
-                        background: "#09386c",
-                        
-                    };
+                return "background: #09386c !important";
             case "p00":
                 return "background: #5ba2cb  !important" ;
             case "p02":

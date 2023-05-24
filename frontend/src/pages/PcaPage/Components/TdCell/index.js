@@ -10,7 +10,7 @@ function TdCell({value}) {
     
     useEffect(() => {
 
-      if (value >= 1) {
+      if (value >= 1 || value === 0) {
         setCorr("n01");
       } else if (value < -0.2) {
         setCorr("n02");
@@ -30,7 +30,7 @@ function TdCell({value}) {
     }, [])
     return(
         <TD
-            correlation = {corr}
+          correlation = {corr}
         >
             {value}
 

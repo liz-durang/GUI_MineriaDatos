@@ -125,16 +125,7 @@ function PcaPaso1() {
         <br></br> 
 
         <div className="esquema">
-          <table className="table table-striped-columns">
-            <thead className="table-light">
-              <tr>
-                <th scope="col"> {''} </th>
-                {diccDatos.reverse().map(head => (
-                  <th scope="col" id={diccDatos.indexOf(head)}> {head} </th>
-                ))}
-              </tr>
-            </thead>
-
+          <table className="table ">
             <tbody>
               {dataMatrix.reverse().map(item => (
                 <tr id={dataMatrix.indexOf(item)}>
@@ -147,6 +138,14 @@ function PcaPaso1() {
                 </tr>
               ))}  
             </tbody>
+            <tfoot>
+              <tr>
+                  <th scope="col"> {''} </th>
+                  {diccDatos.reverse().map(head => (
+                    <th scope="col" id={diccDatos.indexOf(head)}> {head} </th>
+                  ))}
+              </tr>
+            </tfoot>
           </table>
         </div> 
 
