@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-import json
 
 from data.pca import PCA
 from utils.helpers import dataframe_to_dict
@@ -56,6 +55,31 @@ def get_variance(n_components: int):
         'cum_variance': cum_variance.tolist(),
         'component': component,
         'sum_variance': sum_variance
+    }
+
+    return response
+
+@router.get("/relevance")
+def get_relevance(charge: float):
+    """
+    Se examina la proporción de relevancias -cargas-
+    """
+    charges, acp_data = pca.get_relevance_proportion(charge)
+    response = {
+        'charges': dataframe_to_dict(charges),
+        'acp_data': acp_data.to_dict()
+    }
+
+    return response
+
+@router.get("/variables")
+def get_available_variables():
+    """
+    Regresa las variables disponibles.
+    """
+    data = pca.get_variables()
+    response = {
+        'variables': data.to_list()
     }
 
     return response

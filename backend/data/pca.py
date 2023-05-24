@@ -8,10 +8,13 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 class PCA:
     def __init__(self):
         try:
-            self.data = pd.read_csv('files/diabetes.csv')
+            self.data = pd.read_csv('files/WDBC.csv')
         except:
             print('No se pudo leer el archivo')
+
         self.standarizer = StandardScaler()
+        self.new_matrix = None
+        self.pca = None
 
     def get_data(self) -> pd.DataFrame:
         return self.data
@@ -56,6 +59,29 @@ class PCA:
     def get_cumulative_variance(self) -> np.ndarray:
         return self.pca.explained_variance_ratio_.cumsum()
 
-    # def get_relevance_proportion(self):
-    #     columns = self.new_matrix.columns
-    #     charges = pd.DataFrame(abs(self.pca.components_), columns=columns)
+    def get_relevance_proportion(self, charge: float) -> tuple[pd.DataFrame, pd.DataFrame]:
+        if self.new_matrix is None:
+            self.standarize()
+        if self.pca is None:
+            self.get_pca(8)
+
+        columns = self.new_matrix.columns
+        charges = pd.DataFrame(
+            abs(self.pca.components_),
+            columns=columns
+        )
+
+        for col in charges.columns:
+            if (charges[col] > charge).any():
+                del charges[col]
+
+        data_columns = set(self.data.columns)
+        charges_columns = set(charges.columns)
+
+        columns_to_delete = data_columns.difference(charges_columns)
+        acp_data = self.data.drop(columns_to_delete, axis=1)
+
+        return (charges, acp_data)
+
+    def get_variables(self) -> pd.Index:
+        return self.data.columns
