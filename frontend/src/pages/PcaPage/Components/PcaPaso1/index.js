@@ -40,7 +40,7 @@ function PcaPaso1() {
 
     //Convertir el arreglo de objetos a un arreglo de arreglos
     function formatData() {
-      if (correlation != undefined) {
+      if (correlation !== undefined) {
 
         //Obtener diccionario de datos
         correlation.map(dat => (
@@ -50,7 +50,7 @@ function PcaPaso1() {
         diccDatos = diccDatos.slice(1,2);  
 
         let arr = [];
-        if (diccDatos[0] != undefined) {
+        if (diccDatos[0] !== undefined) {
           diccDatos[0].map(dat => ( 
             arr.push(dat)
           ))
@@ -119,28 +119,14 @@ function PcaPaso1() {
             </tbody>
           </table>
         </div> 
-
+        
         <br></br>         
         <h4>Mapa de calor de correlaciones</h4>
-        <br></br>
-        
-        <div className="esquema">
-          <table className="table">
-            <tbody>
-                {dataMatrix.reverse().map(item => (
-                  <tr id={dataMatrix.indexOf(item)}>
-                    {item.reverse().map(it => (
-                      <TdCell 
-                        value={it}
-                        
-                      />
-                        
-                    ))}
-                  </tr>
-                ))}  
-              </tbody>
+        <br></br> 
 
-              <thead className="table-light">
+        <div className="esquema">
+          <table className="table table-striped-columns">
+            <thead className="table-light">
               <tr>
                 <th scope="col"> {''} </th>
                 {diccDatos.reverse().map(head => (
@@ -148,13 +134,24 @@ function PcaPaso1() {
                 ))}
               </tr>
             </thead>
-          </table>
-          
 
-        </div>
+            <tbody>
+              {dataMatrix.reverse().map(item => (
+                <tr id={dataMatrix.indexOf(item)}>
+                  {item.reverse().map(it => (
+                     <TdCell
+                        value={it} 
+                      />
+
+                  ))}
+                </tr>
+              ))}  
+            </tbody>
+          </table>
+        </div> 
 
     </>
   );
 }
 
-export {PcaPaso1};
+export { PcaPaso1 };

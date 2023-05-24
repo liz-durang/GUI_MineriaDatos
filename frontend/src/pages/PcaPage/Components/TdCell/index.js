@@ -1,33 +1,33 @@
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 
 import { TD } from "../../styleComponents";
 
 function TdCell({value}) {
-    console.log(value);
 
-    let corr = '';
-    switch ({value}) {
-        case value < -0.2:
-            corr = 'n02';
-            break;
-        case value < 0.0:
-            corr = 'p00';
-            break;
-        case value < 0.2:
-            corr = 'p02';
-        break;
+    const [corr, setCorr] = useState();
+    
+    useEffect(() => {
 
-        case value < 0.4:
-            corr = 'p02';
-        break;
+      if (value >= 1) {
+        setCorr("n01");
+      } else if (value < -0.2) {
+        setCorr("n02");
+      } else if (value < 0.0) {
+        setCorr("p00");
+      } else if (value < 0.2) {
+        setCorr("p02");
+      } else if (value < 0.4) {
+        setCorr("p04");
+      } else if (value < 0.6) {
+        setCorr("p06");
+      } else if (value > 0.6) {
+        setCorr("p07");
+      }
 
-        case value < 0.6:
-            corr = 'p06';
-        break;
-        default:
-            break;
-    }
+
+    }, [])
     return(
         <TD
             correlation = {corr}
@@ -35,7 +35,7 @@ function TdCell({value}) {
             {value}
 
         </TD>
-    )
+    );
     
 }
 

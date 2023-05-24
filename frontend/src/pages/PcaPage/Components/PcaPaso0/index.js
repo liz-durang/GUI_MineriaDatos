@@ -33,6 +33,7 @@ function PcaPaso0() {
 
     //Convertir el arreglo de objetos a un arreglo de arreglos
     function formatData() {
+      
       if (data0 != undefined) {
 
         //Obtener diccionario de datos
@@ -87,11 +88,8 @@ function PcaPaso0() {
                   ))}
                 </tr>
               ))}
-             
-            </tbody>
-            
+            </tbody>       
           </table>
-
         </div> 
 
     </>
