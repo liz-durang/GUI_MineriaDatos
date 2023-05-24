@@ -1,0 +1,17 @@
+
+
+.esquema{
+    margin: auto;
+    height: 40vh;
+    overflow: scroll;
+    width: 96%;
+}
+
+.correlacional{
+    height: 55vh;
+}
+
+.tdd{
+    background-color: red;
+}
+

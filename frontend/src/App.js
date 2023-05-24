@@ -10,7 +10,9 @@ import { Footer } from "./Components/Footer";
 import { NavbarOff } from "./Components/NavbarOff";
 import './App.css';
 
+
 function App() {
+
   return (
     <>
       <NavbarOff/>
