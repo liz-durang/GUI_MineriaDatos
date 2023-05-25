@@ -11,7 +11,7 @@ class EDA:
 
     def get_data(self) -> tuple[pd.DataFrame, int, int]:
         rows, columns = self.data.shape
-        return (self.data, rows, columns)
+        return (self.data.tail(100), rows, columns)
 
     def get_null_variables(self) -> dict[str, int]:
         null_variables = self.data.columns[self.data.isnull().any()]
@@ -24,17 +24,17 @@ class EDA:
     def get_available_variables(self) -> pd.Index:
         return self.data.columns
 
-    def get_variable_analysis(self, variable: str, param: str) -> tuple[pd.DataFrame, pd.DataFrame]:
-        variable = self.data[self.data[variable] == param]
-        description = variable.describe()
+    def get_variable_analysis(self, variable: str, param: str) -> tuple[pd.DataFrame, dict]:
+        variables = self.data[self.data[variable] == param]
+        description = self.data[variable].describe().to_dict()
 
-        return variable, description
+        return variables, description
 
-    def get_statistics(self, variable: str) -> pd.DataFrame:
-        return self.data[variable].describe()
+    def get_statistics(self, variable: str, param: str) -> pd.DataFrame:
+        return self.data[self.data[variable] == param].describe(include='object').to_dict()
 
     def get_correlation(self, variable: str, param: str) -> pd.DataFrame:
-        return self.data[self.data[variable] == param].corr()
+        return self.data[self.data[variable] == param].corr(numeric_only=True)
 
     def get_upper_triangle(self, variable: str, param: str) -> np.ndarray:
         return np.triu(self.get_correlation(variable, param))

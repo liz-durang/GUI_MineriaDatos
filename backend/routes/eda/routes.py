@@ -47,24 +47,24 @@ def get_available_variables():
 @router.get("/var_description")
 def get_variable_description(variable: str, param: str):
     """
-    Regresa la descripción de una variable.
+    Regresa la descripción de una variable y su resumen estadístico.
     """
-    variable, description = eda.get_variable_analysis(variable, param)
+    variables, description = eda.get_variable_analysis(variable, param)
     response = {
-        'variable': dataframe_to_dict(variable),
-        'description': dataframe_to_dict(description)
+        'variable': dataframe_to_dict(variables),
+        'description': description
     }
 
     return response
 
 @router.get("/statistics")
-def get_statistics(variable: str):
+def get_statistics(variable: str, param: str):
     """
-    Regresa las medidas de tendencia central y dispersión de una variable.
+    Regresa la distribución de variables categóricas
     """
-    statistics = eda.get_statistics(variable)
+    statistics = eda.get_statistics(variable, param)
     response = {
-        'statistics': dataframe_to_dict(statistics)
+        'statistics': statistics
     }
 
     return response
