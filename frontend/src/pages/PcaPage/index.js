@@ -4,7 +4,8 @@ import { PcaPaso0 } from "./Components/PcaPaso0";
 import { PcaPaso1 } from "./Components/PcaPaso1";
 import { PcaPaso2 } from "./Components/PcaPaso2";
 import { PcaPaso3y4 } from "./Components/PcaPaso3y4";
-import { PcaPaso5} from "./Components/PcaPaso5";
+import { PcaPaso6} from "./Components/PcaPaso6";
+
 
 function PcaPage() {
 
@@ -29,6 +30,11 @@ function PcaPage() {
         <br></br><br></br>
         <PcaPaso3y4/>
         <br></br><br></br>
+
+        <br></br><br></br>
+        <PcaPaso6/>
+
+        
 
       </main>
 

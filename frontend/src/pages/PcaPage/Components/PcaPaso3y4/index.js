@@ -1,6 +1,6 @@
 
 import React from "react";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { instance } from "../../../Axios";
 import Button from "react-bootstrap/esm/Button";
 import '../index.css';
@@ -39,7 +39,7 @@ function PcaPaso3y4() {
       
       let url = baseURL + data.nComponent;
       setComponent(data.nComponent);
-      //console.log(url)
+      console.log(url);
       getData(url)
       
     }
@@ -84,6 +84,15 @@ function PcaPaso3y4() {
           </table>
         </div> 
         )}
+
+        {!displayTable && ( 
+        <>
+          <div class="spinner-border text-secondary mb-2" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          <p className="text-black-50 font-monospace"> En espera de que selecciones el número de componentes</p>
+        </>
+           )}
       
       
         <br></br><br></br>
