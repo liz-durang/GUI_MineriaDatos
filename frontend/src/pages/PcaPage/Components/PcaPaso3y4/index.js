@@ -52,14 +52,14 @@ function PcaPaso3y4() {
         <form onSubmit={handleSubmit(onSubmit)} >
           <label>Selecciona un número de componentes</label>
           <br></br>
-          <select class="form-select my-2 me-2" aria-label="Default select example" style={{width: "20%", display: "inline"}}
+          <select className="form-select my-2 me-2" aria-label="Default select example" style={{width: "20%", display: "inline"}}
             {...register('nComponent', {
             required: true
           })}> 
             <option value="3">Tres</option>
             <option value="4">Cuatro</option>
             <option value="5">Cinco</option>
-            <option value="6" selected >Seis</option>
+            <option value="6" defaultValue >Seis</option>
             <option value="7">Siete</option>
             <option value="8">Ocho</option>
             <option value="9">Nueve</option>  
@@ -87,8 +87,8 @@ function PcaPaso3y4() {
 
         {!displayTable && ( 
         <>
-          <div class="spinner-border text-secondary mb-2" role="status">
-              <span class="visually-hidden">Loading...</span>
+          <div className="spinner-border text-secondary mb-2" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
           <p className="text-black-50 font-monospace"> En espera de que selecciones el número de componentes</p>
         </>

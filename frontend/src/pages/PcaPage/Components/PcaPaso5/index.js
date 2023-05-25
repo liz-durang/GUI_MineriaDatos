@@ -9,9 +9,6 @@ function PcaPaso5({nComponent, cum_variance, displayTable}) {
   //Datos para gráfico
   let dataChart = cum_variance;
 
-  console.log(nComponent)
-
-  console.log(cum_variance)
 
   function formatData() {
 
@@ -32,7 +29,6 @@ function PcaPaso5({nComponent, cum_variance, displayTable}) {
     //Agregar header a los datos
     dataChart.unshift(["Número de componentes", "cum_variance"])
 
-    console.log(dataChart);
   }
 
   formatData();

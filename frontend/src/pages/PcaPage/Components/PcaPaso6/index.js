@@ -22,7 +22,7 @@ function PcaPaso6() {
     instance.get(url)
     .then(function (response) {
       setCharges(response.data.charges)
-      //console.log(charges);
+  
       setDisplayTable(true);
     })
     .catch(function (error) {
@@ -60,7 +60,6 @@ function PcaPaso6() {
         diccData.push(Object.values(dat))
       ));
 
-      console.log(diccData)
       
     }
   }
@@ -95,7 +94,7 @@ function PcaPaso6() {
           })}> 
             <option value="1">Uno</option>
             <option value="2">Dos</option>
-            <option value="3" selected>Tres</option>
+            <option value="3" defaultValue>Tres</option>
             <option value="4">Cuatro</option>
             <option value="5">Cinco</option>
             <option value="6">Seis</option>
@@ -112,8 +111,8 @@ function PcaPaso6() {
           <table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
-                {diccDatos.map(head => (
-                  <th scope="col" id={diccDatos.indexOf(head)}> {head} </th>
+                {diccDatos.map((head,index) => (
+                  <th scope="col" id={index}> {head} </th>
                 ))}
               </tr>
             </thead>
@@ -144,6 +143,7 @@ function PcaPaso6() {
         <PcaPaso7
           diccDatos = {diccDatos}
         />
+
     </>
   );
 }

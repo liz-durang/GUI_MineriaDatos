@@ -34,8 +34,6 @@ function PcaPage() {
         <br></br><br></br>
         <PcaPaso6/>
 
-        
-
       </main>
 
     </div>
