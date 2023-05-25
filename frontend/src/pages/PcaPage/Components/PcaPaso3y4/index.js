@@ -2,23 +2,27 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
-
+import Button from "react-bootstrap/esm/Button";
 import '../index.css';
+import { useForm } from "react-hook-form";
+import { PcaPaso5 } from "../PcaPaso5";
 
 function PcaPaso3y4() {
 
-  const [components, setComponents] = useState();
-  const [variance, setVariance] = useState();
+  let baseURL = '/pca/variance?n_components='
 
-  let diccDatos = [];
-  let dataStandarize = [];
-  
-  
+  const [cum_variance, setCum_variance] = useState([]);
+  const [eigen, setEigen] = useState([]);
+  const [component, setComponent] = useState();
+  const [displayTable, setDisplayTable] = useState(false);
 
-  useEffect(() => {
-      instance.get('/pca/variance')
+    function getData (url) {
+      instance.get(url)
       .then(function (response) {
-        // manejar respuesta exitosa
+        setEigen(response.data.pca_components);
+        setCum_variance(response.data.cum_variance);
+        //console.log(cum_variance);
+        setDisplayTable(true);
       })
       .catch(function (error) {
         // manejar error
@@ -27,33 +31,67 @@ function PcaPaso3y4() {
       .finally(function () {
         // siempre sera executado
       });
-      
-    }, [])
-
-    formatData(); 
-
-
-    //Convertir el arreglo de objetos a un arreglo de arreglos
-    function formatData() {
-      if (variance !== undefined) {
-        
-      }
     }
 
+    const {register, handleSubmit} = useForm();
+
+    const onSubmit = (data) =>{
+      
+      let url = baseURL + data.nComponent;
+      setComponent(data.nComponent);
+      //console.log(url)
+      getData(url)
+      
+    }
 
   return (
     <>
-        <h3>Pasos 3 y 4: Se calcula la matriz de covarianzas o correlaciones, y se calculan los componentes (eigen-vectores) y la varianza (eigen-valores).</h3>
+        <h3>Pasos 3 y 4: Se calcula la matriz de covarianzas o correlaciones, y se calculan los componentes (eigen-vectores) y la varianza (eigen-valores)</h3>
         <br></br>
 
+        <form onSubmit={handleSubmit(onSubmit)} >
+          <label>Selecciona un número de componentes</label>
+          <br></br>
+          <select class="form-select my-2 me-2" aria-label="Default select example" style={{width: "20%", display: "inline"}}
+            {...register('nComponent', {
+            required: true
+          })}> 
+            <option value="3">Tres</option>
+            <option value="4">Cuatro</option>
+            <option value="5">Cinco</option>
+            <option value="6" selected >Seis</option>
+            <option value="7">Siete</option>
+            <option value="8">Ocho</option>
+            <option value="9">Nueve</option>  
+          </select>
+          <Button type="submit" value="Enviar" style={{backgroundColor: "#3f20ba"}}>Seleccionar</Button>
+        </form>
        
-
-        <div className="esquema">
-          
+       <br></br>
+        {displayTable && (<div className="esquema varianza">
+          <table className="table table-striped-columns">
+            <tbody>
+              {eigen.map(item => (
+                <tr id={eigen.indexOf(item)}>
+                  {item.map(it => (
+                     <td id={item.indexOf(it)}>
+                      {it}
+                    </td>
+                  ))}
+                </tr>
+              ))}  
+            </tbody>
+          </table>
         </div> 
-        
-        
-
+        )}
+      
+      
+        <br></br><br></br>
+       <PcaPaso5
+        nComponent={component}
+        cum_variance={cum_variance}
+        displayTable={displayTable}
+       />
     </>
   );
 }

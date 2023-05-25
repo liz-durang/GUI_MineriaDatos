@@ -24,6 +24,7 @@ function PcaPaso1() {
         setCorrelation(response.data.correlation);
 
         setMatrix(response.data.matrix);
+        console.log(matrix)
       })
       .catch(function (error) {
         // manejar error
