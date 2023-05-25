@@ -70,7 +70,6 @@ function PcaPaso6() {
 
   const onSubmit = (data) =>{
     let url = baseURL + data.nComponent;
-    console.log(url)
     setRelevance(data.nComponent);  
     getData(url);
      
@@ -88,7 +87,7 @@ function PcaPaso6() {
         <form onSubmit={handleSubmit(onSubmit)} >
           <label>Selecciona un valor de carga</label>
           <br></br>
-          <select class="form-select my-2 me-2" aria-label="Default select example" style={{width: "20%", display: "inline"}}
+          <select className="form-select my-2 me-2" aria-label="Default select example" style={{width: "20%", display: "inline"}}
             {...register('nComponent', {
             required: true
           })}> 
@@ -117,10 +116,10 @@ function PcaPaso6() {
               </tr>
             </thead>
             <tbody>
-              {diccData.map(item => (
-                <tr id={diccData.indexOf(item)}>
-                  {item.map(it => (
-                     <td id={item.indexOf(it)}>
+              {diccData.map((item, index) => (
+                <tr id={index}>
+                  {item.map((it, index) => (
+                     <td id={index}>
                       {it}
                     </td>
                   ))}
@@ -133,15 +132,17 @@ function PcaPaso6() {
 
         {!displayTable && ( 
         <>
-          <div class="spinner-border text-secondary mb-2" role="status">
-              <span class="visually-hidden">Loading...</span>
+          <div className="spinner-border text-secondary mb-2" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
-          <p className="text-black-50 font-monospace"> En espera de que selecciones el número de componentes</p>
+          <p className="text-black-50 font-monospace"> En espera de que selecciones el valor de carga</p>
         </>
            )}
       <br></br><br></br>
+
         <PcaPaso7
           diccDatos = {diccDatos}
+          displayTable = { displayTable }
         />
 
     </>

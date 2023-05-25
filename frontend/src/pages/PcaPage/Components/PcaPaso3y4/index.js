@@ -21,7 +21,6 @@ function PcaPaso3y4() {
       .then(function (response) {
         setEigen(response.data.pca_components);
         setCum_variance(response.data.cum_variance);
-        //console.log(cum_variance);
         setDisplayTable(true);
       })
       .catch(function (error) {
@@ -39,7 +38,6 @@ function PcaPaso3y4() {
       
       let url = baseURL + data.nComponent;
       setComponent(data.nComponent);
-      console.log(url);
       getData(url)
       
     }
@@ -71,10 +69,10 @@ function PcaPaso3y4() {
         {displayTable && (<div className="esquema varianza">
           <table className="table table-striped-columns">
             <tbody>
-              {eigen.map(item => (
-                <tr id={eigen.indexOf(item)}>
-                  {item.map(it => (
-                     <td id={item.indexOf(it)}>
+              {eigen.map((item, index) => (
+                <tr id={index}>
+                  {item.map((it, index) => (
+                     <td id={index}>
                       {it}
                     </td>
                   ))}

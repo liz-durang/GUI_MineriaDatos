@@ -72,18 +72,18 @@ function PcaPaso2() {
           <table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
-                <th scope="col"> {''} </th>
-                {diccDatos.map(head => (
-                  <th scope="col" id={diccDatos.indexOf(head)}> {head} </th>
+                
+                {diccDatos.map((head, index) => (
+                  <th scope="col" id={index}> {head} </th>
                 ))}
               </tr>
             </thead>
 
             <tbody>
-              {dataStandarize.map(item => (
-                <tr id={dataStandarize.indexOf(item)}>
-                  {item.map(it => (
-                     <td id={item.indexOf(it)}>
+              {dataStandarize.map((item, index) => (
+                <tr id={index}>
+                  {item.map((it, index) => (
+                     <td id={index}>
                       {it}
                     </td>
                   ))}

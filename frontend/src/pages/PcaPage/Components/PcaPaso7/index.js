@@ -4,7 +4,7 @@ import { instance } from "../../../Axios";
 import { useState, useEffect } from "react";
 import '../index.css';
 
-function PcaPaso7({diccDatos}) {
+function PcaPaso7({diccDatos, displayTable}) {
 
   const [dataBefore, setDataBefore] = useState([]);
   const [variables, setVariables] = useState([]);
@@ -15,8 +15,8 @@ function PcaPaso7({diccDatos}) {
 
     instance.get('/pca/variables')
     .then(function (response) {
-      setVariables(response)
-      console.log(variables.charge);
+      setVariables(response.data.variables)
+      console.log(variables);
     })
     .catch(function (error) {
       // manejar error
@@ -36,32 +36,37 @@ function PcaPaso7({diccDatos}) {
 
         <h4>Atributos antes de PCA</h4>
 
+        
         <table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
-                {dataBefore.map((head, index) => (
-                  <th scope="col" key={index}> 
+                {diccDatos.map((head, index) => (
+                  <td scope="col" key={index}> 
                   {head} 
-                  </th>
+                  </td>
                 ))}
               </tr>
             </thead>
           </table>
+          
 
+        <br></br>
         <h4>Atributos después de PCA</h4>
 
+        {displayTable && (
         <table className="table table-striped-columns">
             <thead className="table-light"> 
               <tr>
-                  <th scope="col" > 
-                  
-                    {variables.Pregnancies}
-                  </th>
+                  {variables.map((variable, index) => (
+                    <td scope="col" key={index}>
+                      {variable}
+                    </td>
+                  ))}
           
               </tr>
             </thead>
           </table>
-        
+        )} 
     </>
   );
 }

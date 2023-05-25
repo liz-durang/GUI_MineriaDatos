@@ -53,7 +53,7 @@ function HomePage() {
 
         <p>Este modelo proporciona un enfoque estructurado y paso a paso para llevar a cabo proyectos de minería de datos, desde la comprensión del problema hasta la implementación de las soluciones. </p>
 
-        <div className="imgCrisp">
+        <div className="imgPages">
           <img src={crisp} className="img-fluid" alt="metodología crisp-dm"/>
         </div>
           

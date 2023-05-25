@@ -37,7 +37,7 @@ function PcaPaso0() {
       if (data0 != undefined) {
 
         //Obtener diccionario de datos
-        data0.map(dat => (
+        data0.map((dat) => (
           diccDatos.push(Object.keys(dat))
         )); 
         
@@ -73,16 +73,16 @@ function PcaPaso0() {
           <table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
-                {diccDatos.map(head => (
-                  <th scope="col" id={diccDatos.indexOf(head)}> {head} </th>
+                {diccDatos.map((head, index) => (
+                  <th scope="col" id={index}> {head} </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {dataToArreglo.map(item => (
-                <tr id={dataToArreglo.indexOf(item)}>
-                  {item.map(it => (
-                     <td id={item.indexOf(it)}>
+              {dataToArreglo.map((item, index) => (
+                <tr id={index}>
+                  {item.map((it, index) => (
+                     <td id={index}>
                       {it}
                     </td>
                   ))}

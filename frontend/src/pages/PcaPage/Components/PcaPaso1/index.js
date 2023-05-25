@@ -24,7 +24,6 @@ function PcaPaso1() {
         setCorrelation(response.data.correlation);
 
         setMatrix(response.data.matrix);
-        console.log(matrix)
       })
       .catch(function (error) {
         // manejar error
@@ -101,17 +100,17 @@ function PcaPaso1() {
             <thead className="table-light">
               <tr>
                 <th scope="col"> {''} </th>
-                {diccDatos.map(head => (
-                  <th scope="col" id={diccDatos.indexOf(head)}> {head} </th>
+                {diccDatos.map((head,index) => (
+                  <th scope="col" id={index}> {head} </th>
                 ))}
               </tr>
             </thead>
 
             <tbody>
-              {dataCorrelation.map(item => (
-                <tr id={dataCorrelation.indexOf(item)}>
-                  {item.map(it => (
-                     <td id={item.indexOf(it)}>
+              {dataCorrelation.map((item,index) => (
+                <tr id={index}>
+                  {item.map((it, index) => (
+                     <td id={index}>
                       {it}
                     </td>
                   ))}
@@ -128,10 +127,12 @@ function PcaPaso1() {
         <div className="esquema">
           <table className="table ">
             <tbody>
-              {dataMatrix.reverse().map(item => (
-                <tr id={dataMatrix.indexOf(item)}>
-                  {item.reverse().map(it => (
+              {dataMatrix.reverse().map((item, index) => (
+                <tr id={index}>
+                  {item.reverse().map((it, index) => (
+                    
                      <TdCell
+                        id={index}
                         value={it} 
                       />
 
@@ -142,8 +143,8 @@ function PcaPaso1() {
             <tfoot>
               <tr>
                   <th scope="col"> {''} </th>
-                  {diccDatos.reverse().map(head => (
-                    <th scope="col" id={diccDatos.indexOf(head)}> {head} </th>
+                  {diccDatos.reverse().map((head, index) => (
+                    <th scope="col" id={index}> {head} </th>
                   ))}
               </tr>
             </tfoot>

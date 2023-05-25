@@ -52,8 +52,8 @@ function PcaPaso5({nComponent, cum_variance, displayTable}) {
 
         {!displayTable && ( 
         <>
-          <div class="spinner-border text-secondary mb-2" role="status">
-              <span class="visually-hidden">Loading...</span>
+          <div className="spinner-border text-secondary mb-2" role="status">
+              <span className="visually-hidden">Loading...</span>
           </div>
           <p className="text-black-50 font-monospace"> En espera de que selecciones el número de componentes</p>
         </>

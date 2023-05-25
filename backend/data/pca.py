@@ -83,5 +83,5 @@ class PCA:
 
         return (charges, acp_data)
 
-    def get_variables(self) -> pd.Index:
+    def get_variables(self) -> pd.DataFrame:
         return self.data.columns
