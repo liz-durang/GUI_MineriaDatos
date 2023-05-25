@@ -17,7 +17,7 @@ class PCA:
         self.pca = None
 
     def get_data(self) -> pd.DataFrame:
-        return self.data
+        return self.data.tail(100)
 
     def read_csv(self, file) -> pd.DataFrame:
         self.data = pd.read_csv(file)
