@@ -69,7 +69,7 @@ def get_relevance(charge: float):
     charges, acp_data = pca.get_relevance_proportion(charge)
     response = {
         'charges': dataframe_to_dict(charges),
-        'acp_data': acp_data.to_dict()
+        'acp_data': dataframe_to_dict(acp_data)
     }
 
     return response
