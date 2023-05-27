@@ -6,6 +6,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import { PcaPaso7 } from "../PcaPaso7";
 import '../../../index.css';
+import Table from "react-bootstrap/esm/Table";
 
 function PcaPaso6() {
 
@@ -32,7 +33,9 @@ function PcaPaso6() {
     .finally(function () {
       // siempre sera executado
     });
+    
   }
+  formatData();
 
   //Convertir el arreglo de objetos a un arreglo de arreglos
   function formatData() {
@@ -60,11 +63,11 @@ function PcaPaso6() {
         diccData.push(Object.values(dat))
       ));
 
-      
+      console.log(diccDatos);
     }
   }
 
-  formatData();
+  
   
   const {register, handleSubmit} = useForm();
 
@@ -107,7 +110,7 @@ function PcaPaso6() {
 
         <br></br>
         {displayTable && (<div className="esquema ">
-          <table className="table table-striped-columns">
+          <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head,index) => (
@@ -116,7 +119,7 @@ function PcaPaso6() {
               </tr>
             </thead>
             <tbody>
-              {diccData.map((item, index) => (
+            {diccData.map((item, index) => (
                 <tr id={index}>
                   {item.map((it, index) => (
                      <td id={index}>
@@ -126,7 +129,8 @@ function PcaPaso6() {
                 </tr>
               ))}  
             </tbody>
-          </table>
+            
+          </Table>
         </div> 
         )}
 
@@ -150,3 +154,8 @@ function PcaPaso6() {
 }
 
 export { PcaPaso6 };
+
+/*
+
+
+*/

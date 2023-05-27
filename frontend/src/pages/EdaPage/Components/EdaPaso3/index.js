@@ -3,19 +3,57 @@ import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 import Table from 'react-bootstrap/Table';
 import '../../../index.css';
+import { all } from "axios";
 
 function EdaPaso3() {
 
-
-    const [dataNull, setDataNull] = useState([]);
-    const [dataValues, setDataValues] = useState([]);
+    let baseURL1 = '/eda/var_description?variable='
+    let baseURL2 = '&param=0'
+    
+    const [variables, setVariables] = useState([]);
+    const [description, setDescription] = useState([]);
+    let diccDatos = [];
+    let diccDescription = [];
+    let allDescriptions = [];
+    let urls = [];
 
     useEffect(() => {
-        instance.get('/eda/null_var')
+        
+      getVariables();
+      getDescription();
+        
+    }, [])
+
+    formatVariables();
+    formatDescriptions();
+    getURL();
+
+    function getVariables() {
+      //leer variables y guardarlas en un arreglo
+      instance.get('/eda')
+      .then(function (response) {
+        // manejar respuesta exitosa
+        setVariables(response.data.data);
+        
+      })
+      .catch(function (error) {
+        // manejar error
+        console.log(error);
+      })
+      .finally(function () {
+        // siempre sera executado
+      });
+    }
+    
+
+    function getDescription() {
+
+      //leer descripciones de cada variable y guardarlas en un arreglo
+      urls.map((item) => (
+        instance.get(item)
         .then(function (response) {
           // manejar respuesta exitosa
-          setDataNull(response.data.null_variables);
-          
+          setDescription((prevArray) => [...prevArray, [response.data.description]]);
         })
         .catch(function (error) {
           // manejar error
@@ -23,53 +61,128 @@ function EdaPaso3() {
         })
         .finally(function () {
           // siempre sera executado
-        });
-        
-        formatData();
-    }, [])
-
-    function formatData() {
-      if (dataNull !== undefined) {
-        dataValues.shift();
-        //Convertir el objeto a un arreglo
-        for (let llave in dataNull) {
-          let aux = []
-          aux.push(llave)
-          aux.push(dataNull[llave]);
-          setDataValues(dataValues.push(aux));
-        }
-        let aux = [];
-        aux.push(dataValues);
-        setDataValues(aux);
-        console.log(dataValues);
-      }
+        })
+      ))
+      
     }
+
+    function formatVariables() {
+      //Obtener diccionario de datos
+      variables.map((dat) => (
+        diccDatos.push(Object.keys(dat))
+      )); 
+      
+      diccDatos = diccDatos.slice(1,2);  
+
+      let arr = [];
+      if (diccDatos[0] != undefined) {
+        diccDatos[0].map(dat => ( 
+          arr.push(dat)
+        ))
+
+        diccDatos = arr; 
+      
+      }
+      diccDatos.unshift('');
+      console.log(diccDatos)
+      //Obtener el endpoint de cada variable
+      
+      console.log(urls);
+    }
+
+    function formatDescriptions() {
+
+      //Obtener nombre de las descripciones 
+      description.map((desc) => (
+        desc.forEach(element => {
+          let aux = []
+          for (let llave in element) {
+            aux.push(llave)
+          }
+          diccDescription.push(aux);
+        }
+      )))
+      diccDescription = diccDescription.slice(1,2); 
+
+      let arr = [];
+        if (diccDescription[0] != undefined) {
+          diccDescription[0].map(dat => (
+            arr.push(dat)
+          ))
+
+          diccDescription = arr; 
+        }
+
+      allDescriptions.push(diccDescription);
+
+      //Obtener valores de datos de un objeto
+      description.map((desc) => (
+        desc.forEach(element => {
+          let aux = []
+          for (let llave in element) {
+            aux.push(element[llave])
+          }
+          allDescriptions.push(aux);
+        }
+      )))
+
+      //
+    }
+
+    function joinDatos() {
+       //Agregarle un valor del dicc de datos a cada registro. 
+       if (diccDatos !== undefined) {
+        let lengthDicc = diccDatos.length;
+        let aux1 = 0;
+        
+        while (aux1 < lengthDicc) {
+          console.log(diccDatos[aux1]);
+          
+        }
+       }
+        
+    }
+    console.log(allDescriptions)
+
+    function getURL() {
+      diccDatos.forEach(element => {
+        let url = baseURL1 + element + baseURL2;
+        urls.push(url);
+      });
+    }
+
+    
+    
 
     return(
 
         <>
-        <h3>Paso 2: Identificación de datos faltantes</h3>
+        <h3>Paso 3: Detección de valores atípicos</h3>
         <br></br>
-        <p> Se hace identificación de variables con el número de datos nulos que contienen</p>
+        <h4> 1) Distribución de variables numéricas</h4>
 
-        <Table bordered style={{width: "450px", margin: "auto"}} className="esquema">
-          <thead>
-            <tr>
-              <th>Variable</th>
-              <th>Datos nulos</th>
-            </tr>
-          </thead>
-          {dataValues.map((item, index) => (
-          <tbody>
-              {item.map((it, index) => (
+
+        <h4> 2) Resumen estadístico de variables numéricas</h4>
+        <div className="esquema">
+          <Table bordered style={{width: "450px", margin: "auto"}} className="table table-striped-columns">
+            <thead>
+              <tr>
+
+              </tr>
+            </thead>
+            <tbody>
+              {allDescriptions.map((item, index) => (
                 <tr id={index}>
-                     <td id={index}>{it[0]} </td>
-                     <td id={index}>{it[1]}</td>
+                  {item.map((it, index) => (
+                     <td id={index}>
+                      {it}
+                    </td>
+                  ))}
                 </tr>
               ))}
-          </tbody>
-          ))}  
-      </Table>
+            </tbody> 
+         </Table>
+        </div>
         </>
     );
     

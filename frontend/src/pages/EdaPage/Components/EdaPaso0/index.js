@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 import '../../../../pages/index.css';
+import Table from "react-bootstrap/esm/Table";
 
 
 function EdaPaso0() {
@@ -69,7 +70,7 @@ function EdaPaso0() {
         <br></br>
 
         <div className="esquema">
-          <table className="table table-striped-columns">
+          <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head, index) => (
@@ -88,7 +89,7 @@ function EdaPaso0() {
                 </tr>
               ))}
             </tbody>       
-          </table>
+          </Table>
         </div> 
 
     </>

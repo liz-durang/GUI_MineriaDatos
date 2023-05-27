@@ -3,15 +3,13 @@ import React from "react";
 import { instance } from "../../../Axios";
 import { useState, useEffect } from "react";
 import '../../../index.css';
+import Table from "react-bootstrap/esm/Table";
 
 function PcaPaso7({diccDatos, displayTable}) {
 
-  const [dataBefore, setDataBefore] = useState([]);
   const [variables, setVariables] = useState([]);
 
   useEffect(() => {
-    setDataBefore(diccDatos);
-    console.log(dataBefore);
 
     instance.get('/pca/variables')
     .then(function (response) {
@@ -37,7 +35,7 @@ function PcaPaso7({diccDatos, displayTable}) {
         <h4>Atributos antes de PCA</h4>
 
         
-        <table className="table table-striped-columns">
+        <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head, index) => (
@@ -47,14 +45,14 @@ function PcaPaso7({diccDatos, displayTable}) {
                 ))}
               </tr>
             </thead>
-          </table>
+          </Table>
           
 
         <br></br>
         <h4>Atributos después de PCA</h4>
 
         {displayTable && (
-        <table className="table table-striped-columns">
+        <Table className="table table-striped-columns">
             <thead className="table-light"> 
               <tr>
                   {variables.map((variable, index) => (
@@ -65,7 +63,7 @@ function PcaPaso7({diccDatos, displayTable}) {
           
               </tr>
             </thead>
-          </table>
+          </Table>
         )} 
     </>
   );
