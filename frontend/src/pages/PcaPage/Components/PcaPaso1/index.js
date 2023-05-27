@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 import { TdCell } from "../TdCell";
 
-import '../index.css';
+import '../../../index.css';
 
 function PcaPaso1() {
 

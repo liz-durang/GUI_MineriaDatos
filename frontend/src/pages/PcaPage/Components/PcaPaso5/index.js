@@ -2,7 +2,7 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 
-import '../index.css';
+import '../../../index.css';
 
 function PcaPaso5({nComponent, cum_variance, displayTable}) {
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 
-import '../index.css';
+import '../../../index.css';
 
 function PcaPaso2() {
 
@@ -80,9 +80,9 @@ function PcaPaso2() {
             </thead>
 
             <tbody>
-              {dataStandarize.map((item, index) => (
+              {dataStandarize.map((i,index) => (
                 <tr id={index}>
-                  {item.map((it, index) => (
+                  {i.map(it => (
                      <td id={index}>
                       {it}
                     </td>

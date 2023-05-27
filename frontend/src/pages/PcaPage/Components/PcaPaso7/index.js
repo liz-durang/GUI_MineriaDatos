@@ -2,7 +2,7 @@
 import React from "react";
 import { instance } from "../../../Axios";
 import { useState, useEffect } from "react";
-import '../index.css';
+import '../../../index.css';
 
 function PcaPaso7({diccDatos, displayTable}) {
 

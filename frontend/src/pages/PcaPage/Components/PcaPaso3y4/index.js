@@ -3,7 +3,7 @@ import React from "react";
 import {  useState } from "react";
 import { instance } from "../../../Axios";
 import Button from "react-bootstrap/esm/Button";
-import '../index.css';
+import '../../../index.css';
 import { useForm } from "react-hook-form";
 import { PcaPaso5 } from "../PcaPaso5";
 

@@ -2,21 +2,20 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
-import '../../../index.css';
-import Table from "react-bootstrap/esm/Table";
+import '../../../../pages/index.css';
 
 
-function PcaPaso0() {
+function EdaPaso0() {
 
   const [data0, setData0] = useState([]);
   let dataToArreglo = [];
   let diccDatos = [];
 
   useEffect(() => {
-      instance.get('/pca')
+      instance.get('/eda')
       .then(function (response) {
         // manejar respuesta exitosa
-        setData0(response.data);
+        setData0(response.data.data);
       })
       .catch(function (error) {
         // manejar error
@@ -70,7 +69,7 @@ function PcaPaso0() {
         <br></br>
 
         <div className="esquema">
-          <Table className="table table-striped-columns">
+          <table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head, index) => (
@@ -89,11 +88,11 @@ function PcaPaso0() {
                 </tr>
               ))}
             </tbody>       
-          </Table>
+          </table>
         </div> 
 
     </>
   );
 }
 
-export {PcaPaso0};
+export {EdaPaso0};

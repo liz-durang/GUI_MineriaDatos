@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import { PcaPaso7 } from "../PcaPaso7";
-import '../index.css';
+import '../../../index.css';
 
 function PcaPaso6() {
 

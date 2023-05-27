@@ -1,6 +1,10 @@
 import React from "react";
 
-import eda from '../assets/eda.png';
+import eda from '../../assets/eda.png';
+import { EdaPaso0 } from "./Components/EdaPaso0";
+import { EdaPaso1 } from "./Components/EdaPaso1";
+import { EdaPaso2 } from "./Components/EdaPaso2";
+import { EdaPaso3 } from "./Components/EdaPaso3";
 
 function EdaPage() {
   return (
@@ -19,6 +23,13 @@ function EdaPage() {
           <img src={eda} className="img-fluid" alt="analisis exploratorio de datos"/>
         </div>
 
+        <EdaPaso0/>
+        <br></br><br></br>
+        <EdaPaso1/> 
+        <br></br><br></br>
+        <EdaPaso2/> 
+        <br></br><br></br>
+        <EdaPaso3/> 
       </main>
 
     </div>
