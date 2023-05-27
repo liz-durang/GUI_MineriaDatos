@@ -3,37 +3,39 @@ import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 import Table from 'react-bootstrap/Table';
 import '../../../index.css';
-import { all } from "axios";
-
 function EdaPaso3() {
 
-    let baseURL1 = '/eda/var_description?variable='
-    let baseURL2 = '&param=0'
+    const baseURL1 = '/eda/var_description?variable='
+    const baseURL2 = '&param=0'
     
     const [variables, setVariables] = useState([]);
-    const [description, setDescription] = useState([]);
-    let diccDatos = [];
-    let diccDescription = [];
+    const [urls, setUrls] = useState([]);
+    const [descriptions, setDescriptions] = useState([]);
+    const [nameDescriptions, setNameDesriptions] = useState([]);
+    const [diccDatos, setDiccDatos] = useState([]);
+
     let allDescriptions = [];
-    let urls = [];
 
     useEffect(() => {
         
       getVariables();
+      getURLs();
+      getNameDescription();
       getDescription();
         
     }, [])
 
-    formatVariables();
-    formatDescriptions();
-    getURL();
-
     function getVariables() {
+      
       //leer variables y guardarlas en un arreglo
       instance.get('/eda')
       .then(function (response) {
         // manejar respuesta exitosa
-        setVariables(response.data.data);
+        let aux = response.data.data[0];
+        aux = Object.keys(aux);
+        setVariables(aux);
+
+        //Si se obtienen los datos, continua con lo demás 
         
       })
       .catch(function (error) {
@@ -41,19 +43,35 @@ function EdaPaso3() {
         console.log(error);
       })
       .finally(function () {
-        // siempre sera executado
+        
       });
+      setVariables((prevVar) => [...prevVar, 'h']);
     }
-    
+    console.log(variables);
+
+    function getURLs() {
+      variables.map((item) => {
+        const newURL = baseURL1 + item + baseURL2;
+        if (!urls.includes(newURL)) {
+          setUrls((prevUrls) => [...prevUrls, newURL]);
+        }
+      })
+      //Si se obtienen los datos, continua con lo demás 
+      
+    }
+    console.log(urls);
 
     function getDescription() {
-
       //leer descripciones de cada variable y guardarlas en un arreglo
       urls.map((item) => (
         instance.get(item)
         .then(function (response) {
           // manejar respuesta exitosa
-          setDescription((prevArray) => [...prevArray, [response.data.description]]);
+          //Agregar valores descripciones
+          let newDescription = Object.values(response.data.description);
+          if ((descriptions.length+1) < urls.length) {
+            setDescriptions((prevDescription) => [...prevDescription, newDescription]);
+          }
         })
         .catch(function (error) {
           // manejar error
@@ -63,96 +81,31 @@ function EdaPaso3() {
           // siempre sera executado
         })
       ))
-      
     }
 
-    function formatVariables() {
-      //Obtener diccionario de datos
-      variables.map((dat) => (
-        diccDatos.push(Object.keys(dat))
-      )); 
+    function getNameDescription() {
       
-      diccDatos = diccDatos.slice(1,2);  
-
-      let arr = [];
-      if (diccDatos[0] != undefined) {
-        diccDatos[0].map(dat => ( 
-          arr.push(dat)
-        ))
-
-        diccDatos = arr; 
-      
+      //leer descripciones de cada variable y guardarlas en un arreglo
+      if (urls.length > 0) {
+        instance.get(urls[0])
+        .then(function (response) {
+          // manejar respuesta exitosa
+          //Agregar valores descripciones
+          let newName = Object.keys(response.data.description);
+          setNameDesriptions(newName);
+        })
+        .catch(function (error) {
+          // manejar error
+          console.log(error);
+        })
+        .finally(function () {
+          // siempre sera executado
+        })
       }
-      diccDatos.unshift('');
-      console.log(diccDatos)
-      //Obtener el endpoint de cada variable
-      
-      console.log(urls);
     }
 
-    function formatDescriptions() {
-
-      //Obtener nombre de las descripciones 
-      description.map((desc) => (
-        desc.forEach(element => {
-          let aux = []
-          for (let llave in element) {
-            aux.push(llave)
-          }
-          diccDescription.push(aux);
-        }
-      )))
-      diccDescription = diccDescription.slice(1,2); 
-
-      let arr = [];
-        if (diccDescription[0] != undefined) {
-          diccDescription[0].map(dat => (
-            arr.push(dat)
-          ))
-
-          diccDescription = arr; 
-        }
-
-      allDescriptions.push(diccDescription);
-
-      //Obtener valores de datos de un objeto
-      description.map((desc) => (
-        desc.forEach(element => {
-          let aux = []
-          for (let llave in element) {
-            aux.push(element[llave])
-          }
-          allDescriptions.push(aux);
-        }
-      )))
-
-      //
-    }
-
-    function joinDatos() {
-       //Agregarle un valor del dicc de datos a cada registro. 
-       if (diccDatos !== undefined) {
-        let lengthDicc = diccDatos.length;
-        let aux1 = 0;
-        
-        while (aux1 < lengthDicc) {
-          console.log(diccDatos[aux1]);
-          
-        }
-       }
-        
-    }
-    console.log(allDescriptions)
-
-    function getURL() {
-      diccDatos.forEach(element => {
-        let url = baseURL1 + element + baseURL2;
-        urls.push(url);
-      });
-    }
-
-    
-    
+    console.log(descriptions);
+    console.log(nameDescriptions);
 
     return(
 
@@ -166,20 +119,24 @@ function EdaPaso3() {
         <div className="esquema">
           <Table bordered style={{width: "450px", margin: "auto"}} className="table table-striped-columns">
             <thead>
+            
               <tr>
-
+              {nameDescriptions.map((item, index) => (
+                <th> {item}  </th>
+              ))}
               </tr>
+            
             </thead>
-            <tbody>
-              {allDescriptions.map((item, index) => (
-                <tr id={index}>
+            <tbody>{
+              descriptions.map((item, index) => (
+                <tr>
                   {item.map((it, index) => (
-                     <td id={index}>
-                      {it}
-                    </td>
+                    <td>{it}</td>
                   ))}
+                    
                 </tr>
               ))}
+                
             </tbody> 
          </Table>
         </div>
