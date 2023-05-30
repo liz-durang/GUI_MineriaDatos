@@ -20,7 +20,8 @@ function EdaPaso32() {
 
     }, [])
     
-    console.log(allDataChar)
+    console.log(allDataChar);
+
     function getData() {
       //leer variables y guardarlas en un arreglo
       instance.get('/eda')
@@ -73,29 +74,35 @@ function EdaPaso32() {
           //setDisplayTable(true);
         });
       }) 
+       
       
     }  
 
     function separarData(){
-      let allDataAux = [];
-      let dataAux = [];
-      for (let index = 0; index < dataChar.length; index++) {
-        if (dataChar[index][0] !== 'variable') {
-          dataAux.push(dataChar[index]);
-        } else{
-          allDataAux.push(dataAux);
-          dataAux = [];
+
+      if (allDataChar.length < variables.length) {
+        let allDataAux = [];
+        let dataAux = [];
+        for (let index = 0; index < dataChar.length; index++) {
+          if (dataChar[index][0] !== 'variable') {
+            dataAux.push(dataChar[index]);
+          } else{
+            allDataAux.push(dataAux);
+            dataAux = [];
+          }
+          
         }
+        allDataAux.push(dataAux);
+        allDataAux.shift();
+        
+        //a cada arreglo de datos agregarle su etiqueta
+        allDataAux.map((item) => (
+          item.unshift(['variable', 'count'])
+        ))
+        setAllDataChar(allDataAux);
         
       }
-      allDataAux.push(dataAux);
-      allDataAux.shift();
       
-      //a cada arreglo de datos agregarle su etiqueta
-      allDataAux.map((item) => (
-        item.unshift(['variable', 'count'])
-      ))
-     setAllDataChar(allDataAux);
 
      
     }
@@ -107,10 +114,11 @@ function EdaPaso32() {
     function startQuery() {
       
       formatData();
-      separarData(); 
+      separarData();
+
       if (allDataChar.length > 0) {
         setDisplayTable(true);
-       }
+      }
     }
     return(
 
@@ -122,8 +130,8 @@ function EdaPaso32() {
             <Button style={{backgroundColor: "#3f20ba"}} size="lg" onClick={startQuery}>
                Consulta con tres clic's
              </Button>
-
             )}
+            
 
             <br></br>
 
@@ -131,11 +139,11 @@ function EdaPaso32() {
             <div className="histogramFlex">
               {allDataChar.map((item, index) => (
               <div key={index}>
-                  <p>{item[1]}</p>
+                  <p className="text-center">{item[1]}</p>
                   <Chart
                   chartType="Histogram"
                   height="400px"
-                  width={"300px"}
+                  width={"350px"}
                   data={item}
                   options={options}
                   /> 
