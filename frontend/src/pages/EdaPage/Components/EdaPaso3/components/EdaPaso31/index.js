@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { instance } from "../../../../../Axios";
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import '../../../../../index.css';
 function EdaPaso31() {
 
@@ -11,17 +12,19 @@ function EdaPaso31() {
     const [variables, setVariables] = useState([]);
     const [urls, setUrls] = useState([]);
     const [descriptions, setDescriptions] = useState([]);
-    const [nameDescriptions, setNameDesriptions] = useState([]);
+    const [nameDescriptions, setNameDescriptions] = useState([]);
+    const [displayTable, setDisplayTable] = useState(false);
+
+    //let descriptions = [];
 
 
     useEffect(() => {
         
     getVariables();
-      
-        
-    }, [])
+    
+    }, []);
 
-    function getVariables() {
+    const getVariables = () => {
       //leer variables y guardarlas en un arreglo
       instance.get('/eda')
       .then(function (response) {
@@ -31,7 +34,7 @@ function EdaPaso31() {
         setVariables(aux);
 
         //Si se obtienen los datos, continua con lo demás 
-        getURLs();
+        
       })
       .catch(function (error) {
         // manejar error
@@ -40,10 +43,10 @@ function EdaPaso31() {
       .finally(function () {
         
       });
+      
     }
-    console.log(variables);
 
-    function getURLs() {
+    const getURLs = () => {
       variables.map((item) => {
         const newURL = baseURL1 + item + baseURL2;
         if (!urls.includes(newURL)) {
@@ -51,11 +54,10 @@ function EdaPaso31() {
         }
       })
       //Si se obtienen los datos, continua con lo demás 
-      getNameDescription();
+      
     }
-    console.log(urls);
 
-    function getNameDescription() {
+    const getNameDescription = () => {
       
       //leer descripciones de cada variable y guardarlas en un arreglo
       if (urls.length > 0) {
@@ -64,9 +66,10 @@ function EdaPaso31() {
           // manejar respuesta exitosa
           //Agregar valores descripciones
           let newName = Object.keys(response.data.description);
-          setNameDesriptions(newName);
+          newName.unshift('variable');
+          setNameDescriptions(newName);
           //Si se obtienen los datos, continua con lo demás 
-          getDescription();
+          
         })
         .catch(function (error) {
           // manejar error
@@ -74,37 +77,45 @@ function EdaPaso31() {
         })
         .finally(function () {
           // siempre sera executado
+          
         })
       }
-      
-      
-    }
-    console.log(nameDescriptions);
-
-    function getDescription() {
-      //leer descripciones de cada variable y guardarlas en un arreglo
-      urls.map((item) => (
-        instance.get(item)
-        .then(function (response) {
-          // manejar respuesta exitosa
-          //Agregar valores descripciones
-          let newDescription = Object.values(response.data.description);
-          if ((descriptions.length+1) < urls.length) {
-            setDescriptions((prevDescription) => [...prevDescription, newDescription]);
-          }
-        })
-        .catch(function (error) {
-          // manejar error
-          console.log(error);
-        })
-        .finally(function () {
-          // siempre sera executado
-        })
-      ))
       //Si se obtienen los datos, continua con lo demás 
-
+      
+      
     }
-    console.log(descriptions);
+
+    const getDescription = () => {
+      //leer descripciones de cada variable y guardarlas en un arreglo
+        
+        urls.map((item, index) => (
+          instance.get(item)
+          .then(function (response) {
+            // manejar respuesta exitosa
+            //Agregar valores descripciones
+            let newDescription = Object.values(response.data.description);
+            newDescription.unshift(variables[index]);
+            
+            setDescriptions((prevDescription) => [...prevDescription, newDescription]);
+            setDisplayTable(true);
+          })
+          .catch(function (error) {
+            // manejar error
+            console.log(error);
+          })
+          .finally(function () {
+            // siempre sera executado
+          })
+        ))
+      
+    }
+
+    function startQuery() {
+      getURLs(); 
+      getNameDescription();
+      getDescription();
+      
+    }
 
   
     return(
@@ -113,41 +124,30 @@ function EdaPaso31() {
         
 
         <h4> 1) Resumen estadístico de variables numéricas</h4>
-        <div className="flexChart">
-        <div className="flexChartChildren">
-          <Table bordered style={{width: "450px", margin: "auto"}} className="table table-striped-columns">
-            <thead>
-              <tr>
-                <th> Variable   </th>
-              </tr>
-            
-            </thead>
-            <tbody>{
-              variables.map((item, index) => (
-                <tr>
-                    <td>{item}</td> 
-                </tr>
-              ))}
-                
-            </tbody> 
-         </Table>
-        </div>
-        <div className="">
+        <br></br>
+        {!displayTable && (
+          <Button style={{backgroundColor: "#3f20ba"}} size="lg" onClick={startQuery}>
+            Consulta con doble clic
+          </Button>
+        )}
+        <br></br>
+
+        {displayTable && ( <div className="esquema">
           <Table bordered style={{width: "450px", margin: "auto"}} className="table table-striped-columns">
             <thead>
               <tr>
 
               {nameDescriptions.map((item, index) => (
-                <th> {item}  </th>
+                <th id={index}> {item}  </th>
               ))}
               </tr>
             
             </thead>
             <tbody>{
               descriptions.map((item, index) => (
-                <tr>
+                <tr id={index}>
                   {item.map((it, index) => (
-                    <td>{it}</td>
+                    <td id={index}>{it}</td>
                   ))}
                     
                 </tr>
@@ -155,9 +155,7 @@ function EdaPaso31() {
                 
             </tbody> 
          </Table>
-        </div> 
-        
-        </div>
+        </div> )}
         </>
     );
     

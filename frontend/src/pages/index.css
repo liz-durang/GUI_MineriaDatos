@@ -13,14 +13,8 @@
     height: auto;
 }
 
-.flexChart{
+.histogramFlex{
     display: flex;
-    height: 40vh;
     overflow: scroll;
     width: 95%;
-}
-
-.flexChartChildren{
-    width: 45% ;
-    flex-wrap: wrap;
 }

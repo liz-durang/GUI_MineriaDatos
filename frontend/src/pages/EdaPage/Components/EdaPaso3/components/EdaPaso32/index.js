@@ -2,55 +2,54 @@ import React from "react";
 import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import { instance } from "../../../../../Axios";
-import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import '../../../../../index.css';
 
 function EdaPaso32() {
 
     const [variables, setVariables] = useState([]);
     const [data, setData] = useState([]);
-    const [okData, setOkData] = useState([]);
-    const [superOkData, setSuperOkData] = useState([]);
     const [dataChar, setDataChar] = useState([]);
-
+    const [displayTable, setDisplayTable] = useState(false);
+    const [allDataChar, setAllDataChar] = useState([]);
+    
     useEffect(() => {
-        
-        
-        getData();
-        
+
+      getData();
+      getVariables(); 
 
     }, [])
-    console.log(data);
+    
+    console.log(allDataChar)
     function getData() {
-        //leer variables y guardarlas en un arreglo
-        instance.get('/eda')
-         .then(function (response) {
-          //console.log(response.data.data);
-          setData(response.data.data);
+      //leer variables y guardarlas en un arreglo
+      instance.get('/eda')
+      .then(function (response) {
+        setData(response.data.data);
+        //Realizar si ya se completo lo anterior
         
-          //Realizar si ya se completo lo anterior
-          getVariables(); 
-         })
-          .catch(function (error) {
-            // manejar error
-            console.log(error);
-          })
-          .finally(function () {
-            
-          });
+      })
+      .catch(function (error) {
+        // manejar error
+        console.log(error);
+      })
+      .finally(function () {   
+        //Siempre se ejecuta
+      });
     }
+
          
     function getVariables() {
-        //leer variables y guardarlas en un arreglo
+      //leer variables y guardarlas en un arreglo
       instance.get('/eda')
       .then(function (response) {
         // manejar respuesta exitosa
         let aux = response.data.data[0];
         aux = Object.keys(aux);
         setVariables(aux);
-
+        
         //Si se obtienen los datos, continua con lo demás 
-        formatData();
+        
       })
       .catch(function (error) {
         // manejar error
@@ -60,55 +59,91 @@ function EdaPaso32() {
         
       });
     }
-    //console.log(variables)
-    
 
     //Convertir objeto a arreglo
     function formatData() {
-        data.map((item, index) => {
-
-            let key = (Object.keys(item)[1] + " | " + data.indexOf(item))
-            let value = Object.values(item)[1]
-            
-            setOkData((prev) => [...prev, [key,value]]);
-        })
-        setSuperOkData((prev) => [...prev, okData]);
-
-        //Si se obtienen los datos, continua con lo demás
-        formatDataChar();
+      variables.map((item, index) => {
+        setDataChar((prev) => [...prev, ['variable', 'count']]);
+        data.map((item) => {
+          let name = Object.keys(item)[index];
+          let key = (Object.keys(item)[index] + " | " + data.indexOf(item))
+          let value = Object.values(item)[index]
+          
+          setDataChar((prev) => [...prev, [key,value]]);
+          //setDisplayTable(true);
+        });
+      }) 
+      
     }  
 
-    console.log(okData);
-    
+    function separarData(){
+      let allDataAux = [];
+      let dataAux = [];
+      for (let index = 0; index < dataChar.length; index++) {
+        if (dataChar[index][0] !== 'variable') {
+          dataAux.push(dataChar[index]);
+        } else{
+          allDataAux.push(dataAux);
+          dataAux = [];
+        }
+        
+      }
+      allDataAux.push(dataAux);
+      allDataAux.shift();
+      
+      //a cada arreglo de datos agregarle su etiqueta
+      allDataAux.map((item) => (
+        item.unshift(['variable', 'count'])
+      ))
+     setAllDataChar(allDataAux);
+
+     
+    }
 
     let options = {
-        title: "Histogram",
         legend: { position: "none" },
       };
-    
-
-    function formatDataChar() {
-        let arrAux = [['Variable', 'count']];
-        let arr = [...arrAux, ...okData];
-        setDataChar(arr);
+      
+    function startQuery() {
+      
+      formatData();
+      separarData(); 
+      if (allDataChar.length > 0) {
+        setDisplayTable(true);
+       }
     }
-    
-    console.log(dataChar);
     return(
 
         <>
             <h4> 2) Distribución de variables numéricas</h4>
             <br></br>
-            <div>
-             <Chart
-                chartType="Histogram"
-                width="100%"
-                height="400px"
-                data={dataChar}
-                options={options}
-                /> 
-            </div>
              
+            {!displayTable && (
+            <Button style={{backgroundColor: "#3f20ba"}} size="lg" onClick={startQuery}>
+               Consulta con tres clic's
+             </Button>
+
+            )}
+
+            <br></br>
+
+            {displayTable && (
+            <div className="histogramFlex">
+              {allDataChar.map((item, index) => (
+              <div key={index}>
+                  <p>{item[1]}</p>
+                  <Chart
+                  chartType="Histogram"
+                  height="400px"
+                  width={"300px"}
+                  data={item}
+                  options={options}
+                  /> 
+              </div>
+              ))}
+            </div>
+            )}
+            
         </>
     );
     
@@ -120,3 +155,8 @@ export { EdaPaso32 }
 Metodo del codo - Identificar el error. Ese error es la difrerencia del elemento al que pertenece y al centroide. 
 En un inicio el error es grande. Pero conforme se vayan obteniendo tras configuraciones de k, esta empieza a disminuir.
 */ 
+
+
+/*
+
+*/
