@@ -5,7 +5,7 @@ import pandas as pd
 class EDA:
     def __init__(self):
         try:
-            self.data = pd.read_csv('files/vaccinations.csv')
+            self.data = pd.read_csv('files/country_vaccinations.csv')
         except:
             print('No se pudo leer el archivo')
 

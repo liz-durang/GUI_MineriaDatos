@@ -2,6 +2,8 @@ import React from "react";
 import '../../../index.css';
 import { EdaPaso31 } from "./components/EdaPaso31";
 import { EdaPaso32 } from "./components/EdaPaso32";
+import { EdaPaso33 } from "./components/EdaPaso33";
+import { EdaPaso34 } from "./components/EdaPaso34";
 function EdaPaso3() {
 
    
@@ -14,6 +16,10 @@ function EdaPaso3() {
         <EdaPaso31/>
         <br></br><br></br>
         <EdaPaso32/>
+        <br></br><br></br>
+        <EdaPaso33/>
+        <br></br><br></br>
+        <EdaPaso34/>
         </>
     );
     
