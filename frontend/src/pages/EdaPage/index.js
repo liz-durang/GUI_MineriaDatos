@@ -4,7 +4,7 @@ import eda from '../../assets/eda.png';
 import { EdaPaso0 } from "./Components/EdaPaso0";
 import { EdaPaso1 } from "./Components/EdaPaso1";
 import { EdaPaso2 } from "./Components/EdaPaso2";
-import { EdaPaso3 } from "./Components/EdaPaso3";
+
 import { EdaPaso4 } from "./Components/EdaPaso4";
 
 function EdaPage() {
@@ -29,8 +29,6 @@ function EdaPage() {
         <EdaPaso1/> 
         <br></br><br></br>
         <EdaPaso2/> 
-        <br></br><br></br>
-        <EdaPaso3/> 
         <br></br><br></br>
         <EdaPaso4/> 
       </main>

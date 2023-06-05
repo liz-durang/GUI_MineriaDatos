@@ -128,12 +128,13 @@ function PcaPaso1() {
           <table className="table ">
             <tbody>
               {dataMatrix.reverse().map((item, index) => (
-                <tr id={index}>
+                <tr id={index} >
                   {item.reverse().map((it, index) => (
                     
                      <TdCell
                         id={index}
-                        value={it} 
+                        value={it}
+                        style={{color: "white"}}
                       />
 
                   ))}

@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 import Table from 'react-bootstrap/Table';
 import '../../../index.css';
+import { EdaPaso3 } from "../EdaPaso3";
 
 function EdaPaso2() {
 
 
     const [dataNull, setDataNull] = useState([]);
     let dataValues = [];
-    const [displayTable, setDisplayTable] = useState(false);
 
     useEffect(() => {
         instance.get('/eda/null_var')
@@ -50,7 +50,7 @@ function EdaPaso2() {
 
         <>
         <h3>Paso 2: Identificación de datos faltantes</h3>
-        <br></br>
+        
         <p> Se hace identificación de variables con el número de datos nulos que contienen.</p>
 
         {JSON.stringify(dataNull).length > 2 && (
@@ -75,6 +75,11 @@ function EdaPaso2() {
       {!(JSON.stringify(dataNull).length > 2) &&(
         <p className="text-center"> <b>Estos datos no contienen valores nulos</b></p>
       )}
+
+      <EdaPaso3
+        dataValues = {dataValues}
+      /> 
+      <br></br><br></br>
         </>
     );
     

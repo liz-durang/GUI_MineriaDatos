@@ -11,7 +11,7 @@ class EDA:
 
     def get_data(self) -> tuple[pd.DataFrame, int, int]:
         rows, columns = self.data.shape
-        return (self.data.tail(100), rows, columns)
+        return (self.data.tail(700), rows, columns)
 
     def get_null_variables(self) -> dict[str, int]:
         null_variables = self.data.columns[self.data.isnull().any()]

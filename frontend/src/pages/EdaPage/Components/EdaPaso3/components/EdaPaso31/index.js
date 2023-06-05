@@ -1,161 +1,152 @@
 import React from "react";
+import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import { instance } from "../../../../../Axios";
-import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import '../../../../../index.css';
-function EdaPaso31() {
 
-    const baseURL1 = '/eda/var_description?variable='
-    const baseURL2 = '&param=0'
-    
-    const [variables, setVariables] = useState([]);
-    const [urls, setUrls] = useState([]);
-    const [descriptions, setDescriptions] = useState([]);
-    const [nameDescriptions, setNameDescriptions] = useState([]);
+
+//Recibe datos que tienen nulls
+function EdaPaso31({dataValues}) {
+
+    const [datValues, setDatValues] = useState([]);
+    const [data, setData] = useState([]);
+    const [dataChar, setDataChar] = useState([]);
     const [displayTable, setDisplayTable] = useState(false);
-
-    //let descriptions = [];
-
-
-    useEffect(() => {
-        
-    getVariables();
     
-    }, []);
+    useEffect(() => {
 
-    const getVariables = () => {
+      getData();
+      
+    }, [])
+
+    //Los datos que tienen nulls ahora hay que separarlos para solo dejar la variable
+    function getDatValues() {
+      dataValues.map((item, key) => {
+        setDatValues((prev) => [...prev, item[0]]);
+
+      });
+    }
+
+    function getData() {
       //leer variables y guardarlas en un arreglo
       instance.get('/eda')
       .then(function (response) {
-        // manejar respuesta exitosa
-        let aux = response.data.data[0];
-        aux = Object.keys(aux);
-        setVariables(aux);
-
-        //Si se obtienen los datos, continua con lo demás 
-        
+        setData(response.data.data);
+        //Realizar si ya se completo lo anterior
       })
       .catch(function (error) {
         // manejar error
         console.log(error);
       })
-      .finally(function () {
-        
+      .finally(function () {   
+        //Siempre se ejecuta
       });
-      
     }
 
-    const getURLs = () => {
-      variables.map((item) => {
-        const newURL = baseURL1 + item + baseURL2;
-        if (!urls.includes(newURL)) {
-          setUrls((prevUrls) => [...prevUrls, newURL]);
+
+    //Convertir objeto a arreglo
+    function formatData() {
+      //Convertir objeto de cada elemento de data a arreglos
+        let arr = [];
+        data.map((itemData, index) => {
+          const entradas = Object.entries(itemData);
+          const [claves, valores] = entradas;
+          entradas.map((it) => (
+            arr.push(it)
+          ))
+          
+        });
+
+        // //Extraer en asubarreglos los elementos que sean iguales
+        const arreglosIguales = [];
+        const grupos = {};
+        for (let i = 0; i < arr.length; i++) {
+          const elemento = arr[i];
+          const llave = arr[i][0];
+
+          if (grupos[llave]) {
+            grupos[llave].push(elemento);
+          } else {
+            grupos[llave] = [elemento];
+          }
         }
-      })
-      //Si se obtienen los datos, continua con lo demás 
-      
-    }
 
-    const getNameDescription = () => {
-      
-      //leer descripciones de cada variable y guardarlas en un arreglo
-      if (urls.length > 0) {
-        instance.get(urls[0])
-        .then(function (response) {
-          // manejar respuesta exitosa
-          //Agregar valores descripciones
-          let newName = Object.keys(response.data.description);
-          newName.unshift('variable');
-          setNameDescriptions(newName);
-          //Si se obtienen los datos, continua con lo demás 
-          
-        })
-        .catch(function (error) {
-          // manejar error
-          console.log(error);
-        })
-        .finally(function () {
-          // siempre sera executado
-          
-        })
-      }
-      //Si se obtienen los datos, continua con lo demás 
-      
-      
-    }
+        for (const clave in grupos) {
+          arreglosIguales.push(grupos[clave]);
+        }
 
-    const getDescription = () => {
-      //leer descripciones de cada variable y guardarlas en un arreglo
-        
-        urls.map((item, index) => (
-          instance.get(item)
-          .then(function (response) {
-            // manejar respuesta exitosa
-            //Agregar valores descripciones
-            let newDescription = Object.values(response.data.description);
-            newDescription.unshift(variables[index]);
+        //Anotar los index de los elemetos que no tienen valores nulos 
+        // y agregarles su etqiueta a los que sí
+        let indicesAEliminar = []
+        arreglosIguales.map((item, index) => {
+          if (!datValues.includes(item[0][0])) {
             
-            setDescriptions((prevDescription) => [...prevDescription, newDescription]);
-            setDisplayTable(true);
-          })
-          .catch(function (error) {
-            // manejar error
-            console.log(error);
-          })
-          .finally(function () {
-            // siempre sera executado
-          })
-        ))
-      
-    }
+            indicesAEliminar.push(index)
+          }else{
+            item.unshift(['variable', 'count']);
+          }
+        })
 
-    function startQuery() {
-      getURLs(); 
-      getNameDescription();
-      getDescription();
-      
-    }
+        //Eliminar elementos dado los indices
+        indicesAEliminar.sort((a, b) => b - a); // Ordenar los índices en orden descendente
+
+        for (let i = 0; i < indicesAEliminar.length; i++) {
+          arreglosIguales.splice(indicesAEliminar[i], 1);
+        }
+
+        setDataChar(arreglosIguales);
+        if (dataChar.length > 0) {
+          setDisplayTable(true);
+        }
+    }  
 
   
+
+    let options = {
+        legend: { position: "none" },
+      };
+      
+    function startQuery() {
+      getDatValues();
+      formatData();
+
+    }
     return(
 
         <>
-        
-
-        <h4> 1) Resumen estadístico de variables numéricas</h4>
-        <br></br>
-        {!displayTable && (
-          <Button style={{backgroundColor: "#3f20ba"}} size="lg" onClick={startQuery}>
-            Consulta con doble clic
-          </Button>
-        )}
-        <br></br>
-
-        {displayTable && ( <div className="esquema">
-          <Table bordered style={{width: "450px", margin: "auto"}} className="table table-striped-columns">
-            <thead>
-              <tr>
-
-              {nameDescriptions.map((item, index) => (
-                <th id={index}> {item}  </th>
-              ))}
-              </tr>
             
-            </thead>
-            <tbody>{
-              descriptions.map((item, index) => (
-                <tr id={index}>
-                  {item.map((it, index) => (
-                    <td id={index}>{it}</td>
-                  ))}
-                    
-                </tr>
+            <h4> 1) Distribución de variables numéricas</h4>
+            <br></br>
+             
+            {!displayTable && (
+            <Button style={{backgroundColor: "#3f20ba"}}  onClick={startQuery}>
+               Consulta con tres clic's
+             </Button>
+            )}
+            
+
+            <br></br>
+
+            {displayTable && (
+            <div className="histogramFlex">
+              {dataChar.map((item, index) => (
+              <div key={index}>
+                  <p className="text-center">{item[1][0]}</p>
+                  <Chart
+                  chartType="Histogram"
+                  height="400px"
+                  width="350px"
+                  data={item}
+                  options={options}
+                  /> 
+              </div>
               ))}
-                
-            </tbody> 
-         </Table>
-        </div> )}
+            </div>
+           )}
+
+      
+      
         </>
     );
     
@@ -167,3 +158,8 @@ export { EdaPaso31 }
 Metodo del codo - Identificar el error. Ese error es la difrerencia del elemento al que pertenece y al centroide. 
 En un inicio el error es grande. Pero conforme se vayan obteniendo tras configuraciones de k, esta empieza a disminuir.
 */ 
+
+
+/*
+
+*/
