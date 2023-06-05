@@ -33,22 +33,22 @@ function EdaPaso1() {
         
 
         <Table bordered style={{width: "300px", margin: "auto"}}>
-      <thead>
-      <tr>
-          <th colSpan={2} className="text-center">Estructura del dataset</th>
-        </tr>
+        <thead>
         <tr>
-          <th>Filas</th>
-          <th>Columnas</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{rows}</td>
-          <td>{columns}</td>
-        </tr>
-      </tbody>
-    </Table>
+            <th colSpan={2} className="text-center">Estructura del dataset</th>
+          </tr>
+          <tr>
+            <th>Filas</th>
+            <th>Columnas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{rows}</td>
+            <td>{columns}</td>
+          </tr>
+        </tbody>
+        </Table>
 
 
 

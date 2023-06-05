@@ -13,7 +13,7 @@ export const routesApp = [
       text: '2. Análisis de Componentes Principales'
     },
     {
-    to: '/bosques',
-    text: '3. Bosques Aleatorios'
+    to: '/arboles',
+    text: '3. Arboles de decisión'
     },
   ];

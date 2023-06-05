@@ -63,7 +63,6 @@ function PcaPaso6() {
         diccData.push(Object.values(dat))
       ));
 
-      console.log(diccDatos);
     }
   }
 
@@ -72,9 +71,10 @@ function PcaPaso6() {
   const {register, handleSubmit} = useForm();
 
   const onSubmit = (data) =>{
-    let url = baseURL + data.nComponent;
+    let url = baseURL + data.charge;
     setRelevance(data.nComponent);  
     getData(url);
+    console.log(url)
      
   }
 
@@ -87,25 +87,29 @@ function PcaPaso6() {
         <p>Cuanto mayor sea el valor absoluto, más importante es esa variable en el componente principal.</p>
         <br></br>
  
-        <form onSubmit={handleSubmit(onSubmit)} >
-          <label>Selecciona un valor de carga</label>
-          <br></br>
-          <select className="form-select my-2 me-2" aria-label="Default select example" style={{width: "20%", display: "inline"}}
-            {...register('nComponent', {
-            required: true
-          })}> 
-            <option value="1">Uno</option>
-            <option value="2">Dos</option>
-            <option value="3" defaultValue>Tres</option>
-            <option value="4">Cuatro</option>
-            <option value="5">Cinco</option>
-            <option value="6">Seis</option>
-            <option value="7">Siete</option>
-            <option value="8">Ocho</option>
-            <option value="9">Nueve</option>  
-            <option value="10">Diez</option> 
-          </select>
-          <Button type="submit" value="Enviar" style={{backgroundColor: "#3f20ba"}}>Seleccionar</Button>
+        <form onSubmit={handleSubmit(onSubmit)} className="row" >
+          <div className="col-auto me-1">
+            <label>Ingresa una carga</label>
+            <input
+            className="form-control mt-1"
+            type="text"
+            placeholder="0.5"
+            {...register('charge', {
+                required: true
+            })}
+            />
+          </div>
+          <div  className="col-auto me-1">
+            <label>Da clic aqui</label>
+            <br></br>
+            <Button 
+              type="submit" 
+              value="Enviar" 
+              style={{backgroundColor: "#3f20ba"}}
+            >
+              Consultar
+            </Button>
+          </div>
         </form>
 
         <br></br>
@@ -134,14 +138,7 @@ function PcaPaso6() {
         </div> 
         )}
 
-        {!displayTable && ( 
-        <>
-          <div className="spinner-border text-secondary mb-2" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          <p className="text-black-50 font-monospace"> En espera de que selecciones el valor de carga</p>
-        </>
-           )}
+        
       <br></br><br></br>
 
         <PcaPaso7

@@ -88,20 +88,9 @@ function EdaPaso4() {
                 varNull.push(item);
             })
         }
-
         
-        if (!displayTable) {
-            let count = 0;
-            invertido.map((item) => {
-                item.push(varNull[count])
-                count = count + 1;
-            })
-        }
-        
-
     }
     console.log(invertido)
-     
 
 
     //obtener variables con null
@@ -203,7 +192,7 @@ function EdaPaso4() {
             <tbody>
               {invertido.reverse().map((item, index) => (
                 <tr id={index}>
-                  {item.map((it, index) => (
+                  {item.reverse().map((it, index) => (
                      <TdCell
                         id={index}
                         value={it} 

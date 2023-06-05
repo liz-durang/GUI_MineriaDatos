@@ -38,7 +38,7 @@ function PcaPaso7({diccDatos, displayTable}) {
         <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
-                {diccDatos.map((head, index) => (
+                {variables.map((head, index) => (
                   <td scope="col" key={index}> 
                   {head} 
                   </td>
@@ -55,7 +55,7 @@ function PcaPaso7({diccDatos, displayTable}) {
         <Table className="table table-striped-columns">
             <thead className="table-light"> 
               <tr>
-                  {variables.map((variable, index) => (
+                  {diccDatos.map((variable, index) => (
                     <td scope="col" key={index}>
                       {variable}
                     </td>
