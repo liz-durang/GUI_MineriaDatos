@@ -2,6 +2,11 @@ import React from "react";
 
 import eda from '../../assets/eda.png';
 import { EdaPasoInit } from "./Components/EdaPasoInit";
+import { EdaPaso0 } from "./Components/EdaPaso0";
+import { EdaPaso1 } from "./Components/EdaPaso1";
+import { EdaPaso2 } from "./Components/EdaPaso2";
+import { EdaPaso4 } from "./Components/EdaPaso4";
+
 import {MdTravelExplore } from "react-icons/md"
 import '../stylePages.css'
 
@@ -22,9 +27,19 @@ function EdaPage() {
           <img src={eda} className="img-fluid" alt="analisis exploratorio de datos"/>
         </div>
 
+  
         <br></br><br></br>
-        <EdaPasoInit/>
-      
+          <EdaPaso0
+            
+          />
+          <br></br><br></br>
+          <EdaPaso1
+            
+          /> 
+          <br></br><br></br>
+          <EdaPaso2/> 
+          <br></br><br></br>
+          <EdaPaso4/>
         
       </main>
 

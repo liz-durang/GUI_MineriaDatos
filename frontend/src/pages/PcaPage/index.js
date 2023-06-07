@@ -21,10 +21,16 @@ function PcaPage() {
         <br></br>
         <p>El análisis de componentes principales (ACP o PCA, Principal Component Analysis) es un algoritmo para reducir la cantidad de variables de conjuntos de datos, mientras se conserva la mayor cantidad de información posible.</p>
 
+        <PcaPaso0/>
         <br></br><br></br>
-        <PcaPasoInit/>
+        <PcaPaso1/>
+        <br></br><br></br>
+        <PcaPaso2/>
+        <br></br><br></br>
+        <PcaPaso3y4/>
+        <br></br><br></br>
 
-        
+        <PcaPaso6/>
 
         
 

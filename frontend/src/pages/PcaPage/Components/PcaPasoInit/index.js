@@ -44,13 +44,13 @@ function PcaPasoInit() {
         <br></br>
 
         {/* Formulario */}
-        <form onSubmit={handleFormSubmit} className="row">
+        <form className="row">
           <div className="col-auto me-1 mt-3">
             <input 
               className="form-control" 
               type="file" id="formFile"  
               name="files" 
-              onChange={handleFileChange}
+              
             />
             </div>
             <div className="col-auto me-1 mt-3">

@@ -7,6 +7,7 @@ import Table from "react-bootstrap/esm/Table";
 
 function EdaPaso0({fileSaved}) {
 
+  fileSaved = true;
   const [data0, setData0] = useState([]);
   let dataToArreglo = [];
   let diccDatos = [];

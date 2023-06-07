@@ -4,7 +4,7 @@ import { instance } from "../../../Axios";
 import Table from 'react-bootstrap/Table';
 
 function EdaPaso1({fileSaved}) {
-
+    fileSaved = true;
     const [rows, setRows] = useState([]);
     const [columns, setColumns] = useState([]);
 
