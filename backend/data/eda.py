@@ -3,11 +3,12 @@ import pandas as pd
 
 
 class EDA:
-    def __init__(self):
+    def __init__(self, fileName):
         try:
-            self.data = pd.read_csv('files/country_vaccinations.csv')
+            self.data = pd.read_csv(fileName)
         except:
             print('No se pudo leer el archivo')
+
 
     def get_data(self) -> tuple[pd.DataFrame, int, int]:
         rows, columns = self.data.shape

@@ -1,8 +1,59 @@
 .page{
     width: 80%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .imgPages{
     width: 45%;
     margin: auto;
 }
+
+.contenido{
+    width: 65%;
+}
+
+.homepage{
+    width: 90%;
+}
+
+
+.indice{
+    height: 50vh;
+    width: 20%;
+    position: sticky;
+    top: 8vh;
+}
+
+.enphasis{
+    background-color: #e9e8ff;
+    border-radius: 8px;
+}
+
+ul{
+    list-style: none;
+}
+
+.indice-item{
+    color: #6c7184;
+    font-size: 15px;
+}
+
+.indice-item a:hover{
+    color: #3f20ba;
+    text-decoration: solid;
+}
+
+
+@media (max-width: 930px) {
+    .page {
+        width: 95%;
+        margin: auto;
+    }
+    .indice{
+        display: none;
+    }
+    .contenido{
+        width: 100%;
+    }
+  }

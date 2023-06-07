@@ -1,10 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { instance } from "../../../../../Axios";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/esm/Button";
 import Table from "react-bootstrap/esm/Table";
-import '../../../../../index.css';
 
 function EdaPaso34() {
 
@@ -53,7 +52,6 @@ function EdaPaso34() {
     function getData (url) {
         instance.get(url)
         .then(function (response) {
-          //console.log(response.data.statistics)
           setStatistics(response.data.statistics)
           setQueryOk(true);
         })
@@ -69,7 +67,6 @@ function EdaPaso34() {
         formatData(); 
     }
 
-    //console.log(statistics)
     
     //Formatear los datos obtenidos para mostarlos 
     function formatData() {
@@ -80,7 +77,6 @@ function EdaPaso34() {
                 return Object.keys(innerObj);
             })
             arregloKeys = arregloKeys[0];
-            // console.log(arregloKeys)
 
             //Convertir objeto de objetos en arreglo de arreglos
             let arregloValues = [];
@@ -88,7 +84,6 @@ function EdaPaso34() {
                 const innerObj = statistics[key];
                 return Object.values(innerObj);
             });
-            // console.log(arregloValues)
 
             //Extraer subarreglos de los valores por índices
             let subarreglos = [];
@@ -97,8 +92,6 @@ function EdaPaso34() {
                     const subarreglo = arregloValues.map((arreglo) => arreglo[i]);
                     subarreglos.push(subarreglo);
                 }
-                
-                // console.log(subarreglos);
 
                 //Unir valores de las estadisticas con los subarreglos
                 let count = 0;
@@ -135,7 +128,7 @@ function EdaPaso34() {
         
         {/* Formulario */}
         <form onSubmit={handleSubmit(onSubmit)} className="row">
-            <div className="col-auto me-1">
+            <div className="col-auto mt-3">
                 <label>Selecciona una variable</label>
                 
                 <select 
@@ -145,13 +138,13 @@ function EdaPaso34() {
                     required: true
                 })}> 
                 
-                {categoricas.map((item) => (
-                        <option value={item} defaultValue={item}>{item}</option>
+                {categoricas.map((item, key) => (
+                        <option value={item} defaultValue={item} key={item}>{item}</option>
                     ))}
                     
                 </select>
             </div>
-            <div className="col-auto me-1">
+            <div className="col-auto me-1 mt-3">
                 <label>Ingresa un parámetro</label>
                 
                 <input
@@ -163,7 +156,7 @@ function EdaPaso34() {
                     })}
                 />
             </div>
-            <div className="col-auto me-1">
+            <div className="col-auto me-1 mt-3">
                 <label>Da doble clic aqui</label>
                 <br></br>
                 <Button 
@@ -188,13 +181,13 @@ function EdaPaso34() {
 
         {/* Tabla con los datos de la consulta */}
         {displayTable && (
-            <div className="esquema mt-4">
+            <div className="table-responsive mt-4" style={{width: "95%"}}>
             <Table className="table table-striped-columns">
                 <thead className="table-light">
                 <tr>   
                     <th></th>
                     {categoricas.map((head, index) => (
-                    <th scope="col" id={index}> {head} </th>
+                    <th scope="col" key={index}> {head} </th>
                     ))}
                 </tr>
                 </thead>

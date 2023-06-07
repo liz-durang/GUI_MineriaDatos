@@ -1,9 +1,8 @@
 import React from "react";
-import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import { instance } from "../../../../../Axios";
+import { Chart } from "react-google-charts";
 import Button from 'react-bootstrap/Button';
-import '../../../../../index.css';
 
 
 //Recibe datos que tienen nulls
@@ -129,7 +128,10 @@ function EdaPaso31({dataValues}) {
             <br></br>
 
             {displayTable && (
-            <div className="histogramFlex">
+            <div 
+              className="histogramFlex" 
+              style={{display: "flex", overflow: "scroll", width: "95%"}}
+            >
               {dataChar.map((item, index) => (
               <div key={index}>
                   <p className="text-center">{item[1][0]}</p>

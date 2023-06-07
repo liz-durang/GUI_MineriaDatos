@@ -1,11 +1,10 @@
 
 import React from "react";
-import {  useState } from "react";
 import { instance } from "../../../Axios";
-import Button from "react-bootstrap/esm/Button";
-import '../../../index.css';
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PcaPaso5 } from "../PcaPaso5";
+import Button from "react-bootstrap/esm/Button";
 
 function PcaPaso3y4() {
 
@@ -66,13 +65,14 @@ function PcaPaso3y4() {
         </form>
        
        <br></br>
-        {displayTable && (<div className="esquema varianza">
+        {displayTable && (
+        <div className="table-responsive" style={{width: "100%", height: "auto"}}>
           <table className="table table-striped-columns">
             <tbody>
               {eigen.map((item, index) => (
-                <tr id={index}>
+                <tr key={index}>
                   {item.map((it, index) => (
-                     <td id={index}>
+                     <td key={index}>
                       {it}
                     </td>
                   ))}

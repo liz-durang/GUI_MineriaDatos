@@ -1,19 +1,23 @@
 
+import {MdTravelExplore } from "react-icons/md"
+import {CgComponents} from "react-icons/cg"
+import {VscListTree} from "react-icons/vsc"
+
+
 export const routesApp = [
     {
-      to: '/',
-      text: '¿Qué es Mineria de Datos?'
-    },
-    {
+      icon: <MdTravelExplore/>,
       to: '/eda',
-      text: '1. Análisis Exploratorio de Datos'
+      text: ' Análisis Exploratorio de Datos'
     },
     {
+      icon: <CgComponents/>,
       to: '/pca',
-      text: '2. Análisis de Componentes Principales'
+      text: ' Análisis de Componentes Principales'
     },
     {
-    to: '/arboles',
-    text: '3. Arboles de decisión'
+      icon: <VscListTree/>,
+      to: '/arboles',
+      text: ' Árbol de Decisión Clasificador'
     },
   ];

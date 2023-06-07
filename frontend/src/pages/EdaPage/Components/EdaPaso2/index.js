@@ -1,9 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
-import Table from 'react-bootstrap/Table';
-import '../../../index.css';
+import { useEffect, useState } from "react";
 import { EdaPaso3 } from "../EdaPaso3";
+import Table from 'react-bootstrap/Table';
+
 
 function EdaPaso2() {
 
@@ -54,22 +54,24 @@ function EdaPaso2() {
         <p> Se hace identificación de variables con el número de datos nulos que contienen.</p>
 
         {JSON.stringify(dataNull).length > 2 && (
-        <Table bordered style={{width: "450px", margin: "auto"}} className="">
-          <thead>
-            <tr>
-              <th>Variable</th>
-              <th>Datos nulos</th>
-            </tr>
-          </thead>
-          <tbody>
-              {dataValues.map((it, index1) => (
-                <tr id={index1}>
-                     <td>{it[0]} </td>
-                     <td>{it[1]} </td>
+          <div className="table-responsive" style={{width: "100%", height: "50vh"}}>
+            <Table bordered style={{width: "450px", margin: "auto"}} className="">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Datos nulos</th>
                 </tr>
-              ))}
-          </tbody>
-      </Table>
+              </thead>
+              <tbody>
+                  {dataValues.map((it, index1) => (
+                    <tr key={index1}>
+                        <td>{it[0]} </td>
+                        <td>{it[1]} </td>
+                    </tr>
+                  ))}
+              </tbody>
+          </Table>
+        </div>
       )}
 
       {!(JSON.stringify(dataNull).length > 2) &&(
@@ -79,7 +81,7 @@ function EdaPaso2() {
       <EdaPaso3
         dataValues = {dataValues}
       /> 
-      <br></br><br></br>
+
         </>
     );
     

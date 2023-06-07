@@ -3,8 +3,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 
-import '../../../index.css';
-
 function PcaPaso2() {
 
   const [standarize, setStandarize] = useState([]);
@@ -68,22 +66,22 @@ function PcaPaso2() {
         <h3>Paso 2: Se hace una estandarización de los datos</h3>
         <br></br>
 
-        <div className="esquema">
+        <div className="table-responsive" style={{width: "100%", height: "45vh"}}>
           <table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 
                 {diccDatos.map((head, index) => (
-                  <th scope="col" id={index}> {head} </th>
+                  <th scope="col" key={index}> {head} </th>
                 ))}
               </tr>
             </thead>
 
             <tbody>
               {dataStandarize.map((i,index) => (
-                <tr id={index}>
-                  {i.map(it => (
-                     <td id={index}>
+                <tr key={index}>
+                  {i.map((it, indexx )=> (
+                     <td key={indexx}>
                       {it}
                     </td>
                   ))}

@@ -7,30 +7,29 @@ export const TD = styled.td`
             case "n01":
                 return "color: white !important";
             case "n02":
-                return "background: #073467 !important";
+                return "background: #1d62a6 !important;";
             case "p00":
-                return "background: #073467  !important" ;
+                return "background: #418fc1  !important" ;
             case "p01":
-                return "background: #195696  !important";
+                return "background: #a4cee3  !important";
             case "p02":
-                return "background: #337eb8  !important";
+                return "background: #f7f5f4  !important";
             case "p03":
-                return "background: #84bcd9  !important";
+                return "background: #fae8dd  !important";
             case "p04":
-                return "background: #82bad8  !important";
+                return "background: #f5af8f  !important";
             case "p05":
-                return "background: #cce2ef  !important";
+                return "background: #da6853  !important";
             case "p06":
-                return "background: #f7f6f6  !important";
+                return "background: #f7f6f6  !important; ";
             case "p07":
-                return "background: #fae9df  !important";
+                return "background: #bf3337  !important; color: white !important";
             case "p08":
-                return "background: #f9c1a6  !important";
+                return "background: #9d1126  !important; color: white !important";
             case "p09":
-                return "background: #d05448  !important";
+                return "background: #a21328  !important; color: white !important";
             case "p10":
-                return "background: #a81529  !important";
-                
+                return "background: #820823  !important; color: white !important";       
         }
     }}
     

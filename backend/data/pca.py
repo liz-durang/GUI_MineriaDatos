@@ -6,9 +6,10 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
 class PCA:
-    def __init__(self):
+
+    def __init__(self, fileName):
         try:
-            self.data = pd.read_csv('files/diabetes.csv')
+            self.data = pd.read_csv(fileName)
         except:
             print('No se pudo leer el archivo')
 

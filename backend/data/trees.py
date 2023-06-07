@@ -64,11 +64,12 @@ class Trees:
         if self.final_classification is None:
             self.__create_models(variable)
             self.__classify()
+
+        
         report = {
             'Criterio': self.ad_tree.criterion,
-            'Importancia variables': self.ad_tree.feature_importances_,
             'Exactitud': accuracy_score(self.y_test, self.final_classification),
-            # 'Reporte de clasificación': classification_report(self.y_test, self.final_classification)
+            'ReporteClasificación': self.get_report_text(self.final_classification)
         }
         importance = pd.DataFrame({
             'Variable': list(self.predictors),
@@ -77,13 +78,15 @@ class Trees:
 
         return report, importance
 
-    def get_report_text(self, variable: str) :
+    def get_report_text(self, variable: str):
         if self.final_classification is None:
             self.__create_models(variable)
             self.__classify()
         return classification_report(
-            self.ad_tree,
-            feature_names=list(self.data.columns)
+            self.y_test,
+            self.final_classification,
+            output_dict=True
+
         )
 
     def __classify(self):

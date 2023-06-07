@@ -78,7 +78,7 @@ def get_classification_report(variable: str):
     report, importance = trees.get_classification_report(variable)
     response = {
         'report': report,
-        # 'importance': dataframe_to_dict(importance)
+        'importance': importance
     }
 
     return response

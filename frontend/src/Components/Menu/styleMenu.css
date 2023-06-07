@@ -1,16 +1,9 @@
-.navSide{
-    width: 20%;
-    height: 85vh;
-    border-right: solid #e9ecef;
-    position: sticky;
-    top: 7vh;
-}
-
 
 .navLink{
     display: block;
 }
 
 .navLink:hover{
-    background-color: #e9ecef;
+    background-color: #c5c7ca;
 }
+

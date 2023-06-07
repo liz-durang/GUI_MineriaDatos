@@ -1,5 +1,4 @@
 import React from "react";
-import '../../../index.css';
 import { EdaPaso31 } from "./components/EdaPaso31";
 import { EdaPaso34 } from "./components/EdaPaso34";
 

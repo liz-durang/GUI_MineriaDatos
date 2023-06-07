@@ -1,8 +1,7 @@
 
 import React from "react";
-import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
-import '../../../index.css';
+import { useEffect, useState } from "react";
 import Table from "react-bootstrap/esm/Table";
 
 
@@ -66,23 +65,24 @@ function PcaPaso0() {
 
   return (
     <>
+        <br></br>
         <h3>Paso 0: Importar datos</h3>
         <br></br>
 
-        <div className="esquema">
+        <div className="table-responsive" style={{width: "100%", height: "45vh"}}>
           <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head, index) => (
-                  <th scope="col" id={index}> {head} </th>
+                  <th scope="col" key={index}> {head} </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {dataToArreglo.map((item, index) => (
-                <tr id={index}>
+                <tr key={index}>
                   {item.map((it, index) => (
-                     <td id={index}>
+                     <td key={index}>
                       {it}
                     </td>
                   ))}

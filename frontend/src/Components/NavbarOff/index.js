@@ -1,14 +1,17 @@
 
 import Navbar from 'react-bootstrap/Navbar';
-
+import '../Menu/styleMenu.css';
 import { GiMining } from "react-icons/gi";
+
 
 function NavbarOff() {
   return (
     <>
-        <Navbar bg="light" sticky='top' className='px-4'>
-            <Navbar.Brand href="/">
-              <GiMining/>
+        <Navbar bg="light" className='px-4' style={{position: 'sticky', top: '0'}}>
+            <Navbar.Brand href="/" style={{width: '95%'}}>
+              <GiMining style={{
+                fontSize: '1.5rem'
+              }}/>
               <p 
                 style={{display: 'inline'}} 
                 className='ps-3'
@@ -17,8 +20,13 @@ function NavbarOff() {
                 Mineria de Datos
 
               </p>
-              </Navbar.Brand>
+            
+            </Navbar.Brand>
+
+
+            
         </Navbar>
+        
     </>
   );
 }

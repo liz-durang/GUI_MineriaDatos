@@ -3,10 +3,9 @@ import React from "react";
 import { instance } from "../../../Axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import Button from "react-bootstrap/esm/Button";
 import { PcaPaso7 } from "../PcaPaso7";
-import '../../../index.css';
 import Table from "react-bootstrap/esm/Table";
+import Button from "react-bootstrap/esm/Button";
 
 function PcaPaso6() {
 
@@ -108,25 +107,27 @@ function PcaPaso6() {
               style={{backgroundColor: "#3f20ba"}}
             >
               Consultar
+
             </Button>
           </div>
         </form>
 
         <br></br>
-        {displayTable && (<div className="esquema ">
+        {displayTable && (
+        <div className="table-responsive" style={{width: "100%"}}>
           <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head,index) => (
-                  <th scope="col" id={index}> {head} </th>
+                  <th scope="col" key={index}> {head} </th>
                 ))}
               </tr>
             </thead>
             <tbody>
             {diccData.map((item, index) => (
-                <tr id={index}>
+                <tr key={index}>
                   {item.map((it, index) => (
-                     <td id={index}>
+                     <td key={index}>
                       {it}
                     </td>
                   ))}

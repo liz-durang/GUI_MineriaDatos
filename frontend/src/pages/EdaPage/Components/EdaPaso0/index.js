@@ -1,12 +1,11 @@
 
 import React from "react";
-import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
-import '../../../../pages/index.css';
+import { useEffect, useState } from "react";
 import Table from "react-bootstrap/esm/Table";
 
 
-function EdaPaso0() {
+function EdaPaso0({fileSaved}) {
 
   const [data0, setData0] = useState([]);
   let dataToArreglo = [];
@@ -26,7 +25,7 @@ function EdaPaso0() {
         // siempre sera executado
       });
       
-    }, [])
+    }, [fileSaved])
 
     formatData(); 
 
@@ -64,25 +63,26 @@ function EdaPaso0() {
     }
 
 
+
   return (
     <>
         <h3>Paso 0: Importar datos</h3>
         <br></br>
 
-        <div className="esquema">
+        <div className="table-responsive" style={{width: "100%", height: "50vh"}}>
           <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head, index) => (
-                  <th scope="col" id={index}> {head} </th>
+                  <th scope="col" key={index}> {head} </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {dataToArreglo.map((item, index) => (
-                <tr id={index}>
+                <tr key={index}>
                   {item.map((it, index) => (
-                     <td id={index}>
+                     <td key={index}>
                       {it}
                     </td>
                   ))}

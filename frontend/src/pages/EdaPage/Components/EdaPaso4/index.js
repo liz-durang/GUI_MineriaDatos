@@ -16,8 +16,7 @@ function EdaPaso4() {
     const [statistics, setStatistics] = useState([]);
     const [dataNull, setDataNull] = useState([]);
     const [displayTable, setDisplayTable] = useState(false);
-    let invertido = []
-    let varNull = []
+    let subarreglosCombinados = [];
 
     useEffect(() => {
         getCategoricas();
@@ -58,7 +57,6 @@ function EdaPaso4() {
     function getData (url) {
         instance.get(url)
         .then(function (response) {
-          //console.log(response.data.upper_triangle)
           setStatistics(response.data.upper_triangle)
           setQueryOk(true);
         })
@@ -75,22 +73,25 @@ function EdaPaso4() {
     }
 
     formatData();
-    //Pasar los valores obtenidos de la query a un arreglo para poder aplicarle reverse
+    //Formato para ver las correlaciones en orden correcto 
     function formatData(){
-        if (statistics.length > 0) {
-            statistics.map((item) => {
-                invertido.push(item);
-            })
-        }
-
-        if (dataNull.length > 0) {
-            dataNull.map((item) => {
-                varNull.push(item);
-            })
-        }
-        
+      subarreglosCombinados = statistics.reduce(function(resultado, arreglo) {
+        arreglo.forEach(function(elemento, indice) {
+          if (!resultado[indice]) {
+            resultado[indice] = [];
+          }
+          resultado[indice].push(elemento);
+        });
+        return resultado;
+      }, []);
+      
+      //insertar nombre de las variables al inicio de cada fila de datos
+      let count = 0;
+      subarreglosCombinados.forEach((item) => {
+        item.unshift(dataNull[count])
+        count = count + 1;
+      })
     }
-    console.log(invertido)
 
 
     //obtener variables con null
@@ -113,6 +114,7 @@ function EdaPaso4() {
     }
 
 
+
     //Acciones del formulario
     const {register, handleSubmit} = useForm();
     const onSubmit = (data) =>{
@@ -133,7 +135,7 @@ function EdaPaso4() {
 
          {/* Formulario */}
          <form onSubmit={handleSubmit(onSubmit)} className="row">
-            <div className="col-auto me-1">
+            <div className="col-auto me-1 mt-3">
                 <label>Selecciona una variable</label>
                 
                 <select 
@@ -143,13 +145,13 @@ function EdaPaso4() {
                     required: true
                 })}> 
                 
-                {categoricas.map((item) => (
-                        <option value={item} defaultValue={item}>{item}</option>
+                {categoricas.map((item, key) => (
+                        <option value={item} defaultValue={item} key={item}>{item}</option>
                     ))}
                     
                 </select>
             </div>
-            <div className="col-auto me-1">
+            <div className="col-auto me-1 mt-3">
                 <label>Ingresa un parámetro</label>
                 
                 <input
@@ -161,7 +163,7 @@ function EdaPaso4() {
                     })}
                 />
             </div>
-            <div className="col-auto me-1">
+            <div className="col-auto me-1 mt-3">
                 <label>Da doble clic aqui</label>
                 <br></br>
                 <Button 
@@ -187,14 +189,14 @@ function EdaPaso4() {
         {/* Mapa de correlaciones */}
         
         {displayTable && (
-        <div className="esquema mt-3">
+        <div className="table-responsive mt-3" style={{width: "95%", height: "45vh"}}>
           <table className="table ">
             <tbody>
-              {invertido.reverse().map((item, index) => (
-                <tr id={index}>
-                  {item.reverse().map((it, index) => (
+              {subarreglosCombinados.map((item, index) => (
+                <tr key={index}>
+                  {item.map((it, index) => (
                      <TdCell
-                        id={index}
+                        key={index}
                         value={it} 
                       />
 
@@ -204,11 +206,10 @@ function EdaPaso4() {
             </tbody>
             <tfoot>
               <tr>
-                  
-                  {varNull.reverse().map((head, index) => (
-                    <th scope="col" id={index}> {head} </th>
-                  ))}
-                  <th scope="col"> {''} </th>
+                <th></th>
+                {dataNull.map((head, index) => (
+                  <th scope="col" key={index}> {head} </th>
+                ))}
               </tr>
             </tfoot>
           </table>

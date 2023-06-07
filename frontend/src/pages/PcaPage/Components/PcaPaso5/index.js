@@ -2,8 +2,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 
-import '../../../index.css';
-
 function PcaPaso5({nComponent, cum_variance, displayTable}) {
 
   //Datos para gráfico
@@ -42,12 +40,16 @@ function PcaPaso5({nComponent, cum_variance, displayTable}) {
         <p>Se identifica mediante una gráfica el grupo de componentes con mayor varianza.</p>
         <br></br>
 
-        {displayTable && (<Chart
-          chartType="Line"
-          height="400px"
-          data={dataChart}
-          className="esquema"
-        />     
+        {displayTable && (
+        <>
+          <div className="table-responsive" style={{width: "100%"}}>
+            <Chart
+              chartType="Line"
+              height="400px"
+              data={dataChart}
+            />  
+          </div>  
+        </> 
         )}   
 
         

@@ -2,7 +2,6 @@
 import React from "react";
 import { instance } from "../../../Axios";
 import { useState, useEffect } from "react";
-import '../../../index.css';
 import Table from "react-bootstrap/esm/Table";
 
 function PcaPaso7({diccDatos, displayTable}) {
@@ -14,7 +13,6 @@ function PcaPaso7({diccDatos, displayTable}) {
     instance.get('/pca/variables')
     .then(function (response) {
       setVariables(response.data.variables)
-      console.log(variables);
     })
     .catch(function (error) {
       // manejar error
@@ -33,26 +31,29 @@ function PcaPaso7({diccDatos, displayTable}) {
         <br></br>
 
         <h4>Atributos antes de PCA</h4>
-
         
-        <Table className="table table-striped-columns">
-            <thead className="table-light">
-              <tr>
-                {variables.map((head, index) => (
-                  <td scope="col" key={index}> 
-                  {head} 
-                  </td>
-                ))}
-              </tr>
-            </thead>
-          </Table>
+        <div className="table-responsive">
+          <Table className="table-responsive table-striped-columns">
+              <thead className="table-light">
+                <tr>
+                  {variables.map((head, index) => (
+                    <td scope="col" key={index}> 
+                    {head} 
+                    </td>
+                  ))}
+                </tr>
+              </thead>
+            </Table>
+        </div>
+        
           
 
         <br></br>
         <h4>Atributos después de PCA</h4>
 
         {displayTable && (
-        <Table className="table table-striped-columns">
+        <div className="table-responsive">
+        <Table className="table-responsive table-striped-columns">
             <thead className="table-light"> 
               <tr>
                   {diccDatos.map((variable, index) => (
@@ -64,6 +65,7 @@ function PcaPaso7({diccDatos, displayTable}) {
               </tr>
             </thead>
           </Table>
+          </div>
         )} 
     </>
   );

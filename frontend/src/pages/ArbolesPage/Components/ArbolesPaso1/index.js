@@ -1,10 +1,8 @@
 
 import React from "react";
-import { useEffect, useState } from "react";
-import { instance } from "../../../Axios";
-import '../../../../pages/index.css';
-import Table from "react-bootstrap/esm/Table";
 import { ArbolesPaso11 } from "../ArbolesPaso11";
+import Table from "react-bootstrap/esm/Table";
+
 
 function ArbolesPaso1({rows, columns}) {
   

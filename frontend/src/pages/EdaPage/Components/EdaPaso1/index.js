@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
 import Table from 'react-bootstrap/Table';
 
-function EdaPaso1() {
+function EdaPaso1({fileSaved}) {
 
     const [rows, setRows] = useState([]);
     const [columns, setColumns] = useState([]);
@@ -23,7 +23,7 @@ function EdaPaso1() {
           // siempre sera executado
         });
         
-    }, [])
+    }, [fileSaved])
 
     return(
 

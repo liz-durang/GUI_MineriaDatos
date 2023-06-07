@@ -1,10 +1,8 @@
 
 import React from "react";
-import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
+import { useEffect, useState } from "react";
 import { TdCell } from "../TdCell";
-
-import '../../../index.css';
 
 function PcaPaso1() {
 
@@ -95,22 +93,22 @@ function PcaPaso1() {
         <h3>Paso 1: Hay evidencia de variables posiblemente correlacionadas</h3>
         <br></br>
 
-        <div className="esquema correlacional">
+        <div className="table-responsive" style={{width: "100%", height: "55vh"}}>
           <table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 <th scope="col"> {''} </th>
                 {diccDatos.map((head,index) => (
-                  <th scope="col" id={index}> {head} </th>
+                  <th scope="col" key={index}> {head} </th>
                 ))}
               </tr>
             </thead>
 
             <tbody>
               {dataCorrelation.map((item,index) => (
-                <tr id={index}>
+                <tr key={index}>
                   {item.map((it, index) => (
-                     <td id={index}>
+                     <td key={index}>
                       {it}
                     </td>
                   ))}
@@ -124,15 +122,15 @@ function PcaPaso1() {
         <h4>Mapa de calor de correlaciones</h4>
         <br></br> 
 
-        <div className="esquema">
+        <div className="table-responsive" style={{width: "100%", height: "auto"}}>
           <table className="table ">
             <tbody>
               {dataMatrix.reverse().map((item, index) => (
-                <tr id={index} >
+                <tr key={index} >
                   {item.reverse().map((it, index) => (
                     
                      <TdCell
-                        id={index}
+                        key={index}
                         value={it}
                         style={{color: "white"}}
                       />
@@ -145,7 +143,7 @@ function PcaPaso1() {
               <tr>
                   <th scope="col"> {''} </th>
                   {diccDatos.reverse().map((head, index) => (
-                    <th scope="col" id={index}> {head} </th>
+                    <th scope="col" key={index}> {head} </th>
                   ))}
               </tr>
             </tfoot>

@@ -1,10 +1,10 @@
 
 import React from "react";
-import { useEffect, useState } from "react";
 import { instance } from "../../../Axios";
-import '../../../../pages/index.css';
-import Table from "react-bootstrap/esm/Table";
+import { useEffect, useState } from "react";
 import { ArbolesPaso1 } from "../ArbolesPaso1";
+import Table from "react-bootstrap/esm/Table";
+
 
 
 function ArbolesPaso0() {
@@ -37,7 +37,7 @@ function ArbolesPaso0() {
     //Convertir el arreglo de objetos a un arreglo de arreglos
     function formatData() {
       
-      if (data0 != undefined) {
+      if (data0 !== undefined) {
 
         //Obtener diccionario de datos
         data0.map((dat) => (
@@ -47,7 +47,7 @@ function ArbolesPaso0() {
         diccDatos = diccDatos.slice(1,2);  
 
         let arr = [];
-        if (diccDatos[0] != undefined) {
+        if (diccDatos[0] !== undefined) {
           diccDatos[0].map(dat => ( 
             arr.push(dat)
           ))
@@ -76,20 +76,20 @@ function ArbolesPaso0() {
         <h3>Paso 0: Importar datos</h3>
         <br></br>
 
-        <div className="esquema">
+        <div className="table-responsive" style={{width: "100%", height: "45vh"}}>
           <Table className="table table-striped-columns">
             <thead className="table-light">
               <tr>
                 {diccDatos.map((head, index) => (
-                  <th scope="col" id={index}> {head} </th>
+                  <th scope="col" key={index}> {head} </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {dataToArreglo.map((item, index) => (
-                <tr id={index}>
+                <tr key={index}>
                   {item.map((it, index) => (
-                     <td id={index}>
+                     <td key={index}>
                       {it}
                     </td>
                   ))}
