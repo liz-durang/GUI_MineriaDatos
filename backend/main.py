@@ -5,6 +5,7 @@ from routes.eda.routes import router as eda_router
 from routes.trees.routes import router as trees_router
 from routes.pca.routes import router as pca_router
 from routes.forest.routes import router as forest_router
+from routes.cluster.routes import router as cluster_router
 
 app = FastAPI()
 
@@ -20,6 +21,7 @@ app.include_router(eda_router, prefix="/eda", tags=["EDA"])
 app.include_router(pca_router, prefix="/pca", tags=["PCA"])
 app.include_router(trees_router, prefix="/trees", tags=["Trees"])
 app.include_router(forest_router, prefix="/forest", tags=["Forest"])
+app.include_router(cluster_router, prefix="/cluster", tags=["Cluster"])
 
 
 

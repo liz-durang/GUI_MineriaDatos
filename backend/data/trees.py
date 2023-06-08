@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn import model_selection
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, roc_curve, auc
+from sklearn.preprocessing import label_binarize
 
 
 class Trees:
@@ -48,7 +49,7 @@ class Trees:
         classification_matrix = pd.crosstab(
             self.y_test.ravel(),
             self.final_classification,
-            rownames=['Actual'],
+            rownames=['Reales'],
             colnames=['Clasificación']
         )
 
@@ -109,3 +110,34 @@ class Trees:
             self.y, test_size=0.2,
             random_state=0
         )
+
+    def get_roc_curve(self, variable: str):
+        fpr = dict()
+        tpr = dict()
+        roc_auc = dict()
+        roc_c = {}
+        s1 = []
+        s2 = []
+        
+        if self.final_classification is None:
+            self.__create_models(variable)
+            self.__classify()
+
+        y_score = self.ad_tree.predict_proba(self.x_test)
+        y_test_bin = label_binarize(self.y_test, classes=list(range(y_score.shape[1])))
+        n_classes = y_test_bin.shape[1]
+
+        for i in range(n_classes):
+            fpr[i], tpr[i], _ = roc_curve(y_test_bin[:, i], y_score[:, i])
+            s1.extend(fpr[i])
+            s2.extend(tpr[i])
+
+            # AUC para cada clase
+            roc_auc[i] = auc(fpr[i], tpr[i])
+
+        roc_c = {
+            'values_x': s1,
+            'values_y': s2,
+        }
+
+        return roc_c, roc_auc

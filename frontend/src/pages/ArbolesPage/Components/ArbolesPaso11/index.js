@@ -180,8 +180,6 @@ function ArbolesPaso11() {
         displayTable = {displayTable}
       />      
       <br></br>
-      
-
 
     </>
   );
