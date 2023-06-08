@@ -2,12 +2,11 @@
 import React from "react";
 import { instance } from "../../../Axios";
 import { useEffect, useState } from "react";
-import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
 import { set, useForm } from "react-hook-form";
 import { Chart } from "react-google-charts";
 
-function ArbolesPaso6({varAnalizar, displayPronostico}) {
+function BosquesPaso6({varAnalizar, displayPronostico}) {
 
   const [displayCurva, setDisplayCurva] = useState(false);
   const [roc_c, setRoc_c] = useState([]);
@@ -18,7 +17,7 @@ function ArbolesPaso6({varAnalizar, displayPronostico}) {
 
 
   function getData() {
-    let url = `/trees/roc-curve?variable=${varAnalizar}`
+    let url = `/forest/roc-curve?variable=${varAnalizar}`
     instance.get(url)
     .then(function (response) {
       setRoc_c(response.data.roc_c)
@@ -37,7 +36,6 @@ function ArbolesPaso6({varAnalizar, displayPronostico}) {
 
   //Dar formato a los datos de la curva 
   function  formatDescription () {
-
     let aux = [["x_values", "y_values"]];
     //Para curva roc
     dataChart = Object.values(roc_c);
@@ -52,7 +50,6 @@ function ArbolesPaso6({varAnalizar, displayPronostico}) {
   }
 
   formatDescription(); 
-
   
   //Acciones del formulario
   const {handleSubmit} = useForm();
@@ -78,7 +75,7 @@ function ArbolesPaso6({varAnalizar, displayPronostico}) {
         <>
           {/* Formulario */}
           <form onSubmit={handleSubmit(onSubmit)} className="row">
-            <div className="col-auto me-1 mt-3">
+            <div className="col-auto me-1 mt-0">
               <br></br>
                 <Button 
                     className="mt-1"
@@ -115,4 +112,4 @@ function ArbolesPaso6({varAnalizar, displayPronostico}) {
   );
 }
 
-export {ArbolesPaso6};
+export {BosquesPaso6};

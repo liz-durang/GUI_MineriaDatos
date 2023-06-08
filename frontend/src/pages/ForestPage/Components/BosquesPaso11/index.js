@@ -82,7 +82,8 @@ function BosquesPaso11() {
 
   return (
     <>
-        <p>Ingresa el nombre de la variable que se va a analizar y consulta con doble clic</p>
+        <p>Ingresa el nombre de la variable que se va a analizar.</p> 
+        <p>Consulta con doble clic</p>
 
         {/* Formulario */}
         <form onSubmit={handleSubmit(onSubmit)} className="row">

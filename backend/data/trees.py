@@ -112,13 +112,13 @@ class Trees:
         )
 
     def get_roc_curve(self, variable: str):
-        fpr = dict()
-        tpr = dict()
-        roc_auc = dict()
+        fpr = {}
+        tpr = {}
+        roc_auc = {}
         roc_c = {}
         s1 = []
         s2 = []
-        
+
         if self.final_classification is None:
             self.__create_models(variable)
             self.__classify()
@@ -129,15 +129,20 @@ class Trees:
 
         for i in range(n_classes):
             fpr[i], tpr[i], _ = roc_curve(y_test_bin[:, i], y_score[:, i])
-            s1.extend(fpr[i])
-            s2.extend(tpr[i])
-
+            #s1[tuple(fpr[i])] = tpr[i]
+            s1.extend(tpr[i]) 
+            s2.extend(fpr[i])
+            
+    
             # AUC para cada clase
-            roc_auc[i] = auc(fpr[i], tpr[i])
+            roc_auc[i] = 1- auc(fpr[i], tpr[i])
 
         roc_c = {
             'values_x': s1,
             'values_y': s2,
         }
-
+        
         return roc_c, roc_auc
+    
+
+    

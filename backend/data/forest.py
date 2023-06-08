@@ -2,10 +2,9 @@ import pandas as pd
 import numpy as np
 from sklearn import model_selection
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, roc_curve, auc
 from sklearn.preprocessing import label_binarize
-from sklearn.metrics import RocCurveDisplay
-from sklearn import metrics
+
 
 class Forest:
     def __init__(self) -> None:
@@ -111,3 +110,37 @@ class Forest:
             self.y, test_size=0.2,
             random_state=0
         )
+
+    def get_roc_curve(self, variable: str):
+        fpr = {}
+        tpr = {}
+        roc_auc = {}
+        roc_c = {}
+        s1 = []
+        s2 = []
+
+        if self.final_classification is None:
+            self.__create_models(variable)
+            self.__classify()
+
+        y_score = self.ad_forest.predict_proba(self.x_test)
+        y_test_bin = label_binarize(self.y_test, classes=list(range(y_score.shape[1])))
+        n_classes = y_test_bin.shape[1]
+
+        for i in range(n_classes):
+            fpr[i], tpr[i], _ = roc_curve(y_test_bin[:, i], y_score[:, i])
+            #s1[tuple(fpr[i])] = tpr[i]
+            s1.extend(tpr[i]) 
+            s2.extend(fpr[i])
+            
+    
+            # AUC para cada clase
+            roc_auc[i] = 1 - auc(fpr[i], tpr[i])
+
+        roc_c = {
+            'values_x': s1,
+            'values_y': s2,
+        }
+        
+        return roc_c, roc_auc
+    

@@ -82,3 +82,13 @@ def get_classification_report(variable: str):
     }
 
     return response
+
+@router.get('/roc-curve')
+def get_roc_curve(variable: str):
+    roc_c, roc_auc = forest.get_roc_curve(variable)
+    response = {
+        'roc_c': roc_c,
+        'roc_auc': roc_auc
+    }
+
+    return response

@@ -6,6 +6,7 @@ import { useState } from "react";
 import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
 import { BosquesPaso5 } from "../BosquesPaso5";
+import { BosquesPaso6 } from "../BosquesPaso6";
 
 
 function BosquesPaso4({varAnalizar, displayTable}) {
@@ -132,6 +133,12 @@ function BosquesPaso4({varAnalizar, displayTable}) {
 
       <br></br>
       <BosquesPaso5
+        varAnalizar = {varAnalizar}
+        displayPronostico = {displayPronostico}
+      />
+
+      <br></br>
+      <BosquesPaso6
         varAnalizar = {varAnalizar}
         displayPronostico = {displayPronostico}
       />
