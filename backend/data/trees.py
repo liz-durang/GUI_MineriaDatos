@@ -69,7 +69,7 @@ class Trees:
         report = {
             'Criterio': self.ad_tree.criterion,
             'Exactitud': accuracy_score(self.y_test, self.final_classification),
-            'ReporteClasificación': self.get_report_text(self.final_classification)
+            'ReporteClasificacion': self.get_report_text(self.final_classification)
         }
         importance = pd.DataFrame({
             'Variable': list(self.predictors),

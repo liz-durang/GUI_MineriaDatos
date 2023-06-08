@@ -1,34 +1,31 @@
 import React from "react";
-import { ArbolesPaso0 } from "./Components/ArbolesPaso0";
 
+import {MdOutlineForest} from "react-icons/md";  
+import { BosquesPaso0 } from "./Components/BosquesPaso0";
 
-import {VscListTree} from "react-icons/vsc";  
-
-function ArbolesPage() {
+function ForestPage() {
   return (
     <div className="page p-4">
       
       <main className="contenido">
       
-        <h2 className="display-4 mb-4"><VscListTree/> Árboles de Decisión Clasificación</h2>
+        <h2 className="display-4 mb-4"><MdOutlineForest/> Bosques Aleatorios Clasificación</h2>
         
         <hr></hr>
         <br></br>
-        <p>Es uno de los algoritmos más utilizados en el aprendizaje automático supervisado. <br></br>
-          Permiten resolver problemas de regresión (pronóstico) y clasificación y admiten valores numéricos y nominales.
-        </p>
-        <p>Su objetivo es construir una estructura jerárquica eficiente y escalable que divide los datos en función de determinadas condiciones. 
-            Para esto se utiliza la estrategia: divide y vencerás.
-        </p>
+        <p>Los bosques aleatorios son una variación moderna, que agrupan varios árboles de decisión para producir 
+            un modelo generalizado con el objetivo de reducir la tendencia al sobreajuste.</p>
+        <p>Es uno de los algoritmos de aprendizaje automático más usados en la actualidad</p>
+
       
       
-      <ArbolesPaso0/>
+      <BosquesPaso0/>
 
       </main>
 
       <div className="indice">
         <ul>
-           <li className="indice-item"><b>Árboles de Decisión Clasificación</b></li>
+           <li className="indice-item"><b>Bosques Aleatorios Clasificación</b></li>
           <br></br>
            <li className="indice-item"> Paso 0: Importar datos</li>
           <br></br>
@@ -48,4 +45,4 @@ function ArbolesPage() {
   );
 }
 
-export { ArbolesPage }
+export { ForestPage }

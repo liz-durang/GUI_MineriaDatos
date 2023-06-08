@@ -2,7 +2,7 @@
 import {MdTravelExplore } from "react-icons/md"
 import {CgComponents} from "react-icons/cg"
 import {VscListTree} from "react-icons/vsc"
-
+import {MdOutlineForest} from "react-icons/md";  
 
 export const routesApp = [
     {
@@ -18,6 +18,11 @@ export const routesApp = [
     {
       icon: <VscListTree/>,
       to: '/arboles',
-      text: ' Árbol de Decisión Clasificador'
+      text: ' Árbol de Decisión Clasificación'
+    },
+    {
+      icon: <MdOutlineForest/>,
+      to: '/bosques',
+      text: ' Bosques Aleatorios Clasificación'
     },
   ];

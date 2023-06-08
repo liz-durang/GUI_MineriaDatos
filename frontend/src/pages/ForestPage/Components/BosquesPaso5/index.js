@@ -6,7 +6,7 @@ import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
 import { useForm } from "react-hook-form";
 
-function ArbolesPaso5({varAnalizar, displayPronostico}) {
+function BosquesPaso5({varAnalizar, displayPronostico}) {
 
   const [criterio, setCriterio] = useState([]);
   const [exactitud, setExactitud] = useState([]);
@@ -17,7 +17,7 @@ function ArbolesPaso5({varAnalizar, displayPronostico}) {
   const [displayReporte, setDisplayReporte] = useState(false);
 
   function getData() {
-    let url = `/trees/classification-report?variable=${varAnalizar}`
+    let url = `/forest/classification-report?variable=${varAnalizar}`
     instance.get(url)
     .then(function (response) {
       setCriterio(response.data.report.Criterio)
@@ -175,4 +175,4 @@ function ArbolesPaso5({varAnalizar, displayPronostico}) {
   );
 }
 
-export {ArbolesPaso5};
+export {BosquesPaso5};

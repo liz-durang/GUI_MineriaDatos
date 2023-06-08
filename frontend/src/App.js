@@ -8,7 +8,10 @@ import { ArbolesPage } from "./pages/ArbolesPage/";
 import { Menu } from "./Components/Menu";
 import { Footer } from "./Components/Footer";
 import { NavbarOff } from "./Components/NavbarOff";
+import { ForestPage } from "./pages/ForestPage";
+
 import './App.css';
+
 
 
 function App() {
@@ -25,7 +28,9 @@ function App() {
             <Route path="/eda" element={<EdaPage/>}/>
             <Route path="/pca" element={<PcaPage/>}/>
             <Route path="/arboles" element={<ArbolesPage/>}/>
+            <Route path="/bosques" element={<ForestPage/>}/>
             <Route path="*" element={<p>404 Not Found </p>}/>
+            
           </Routes>
         </div>
           

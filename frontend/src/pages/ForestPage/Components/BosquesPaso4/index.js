@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
-import { ArbolesPaso5 } from "../ArbolesPaso5";
+import { BosquesPaso5 } from "../BosquesPaso5";
 
 
-function ArbolesPaso4({varAnalizar, displayTable}) {
+function BosquesPaso4({varAnalizar, displayTable}) {
 
   const [pronostico, setPronostico] = useState([]);
   const [accuracy, setAccuracy] = useState([]);
@@ -16,7 +16,7 @@ function ArbolesPaso4({varAnalizar, displayTable}) {
   const [displayPronostico, setDisplayPronostico] = useState(false);
 
   function getData() {
-    let url = `/trees/decision-tree?variable=${varAnalizar}`
+    let url = `/forest/decision-forest?variable=${varAnalizar}`
     instance.get(url)
     .then(function (response) {
       setPronostico(response.data.mod_values)
@@ -56,7 +56,7 @@ function ArbolesPaso4({varAnalizar, displayTable}) {
         <>
           {/* Formulario */}
         <form onSubmit={handleSubmit(onSubmit)} className="row">
-            <div className="col-auto me-1">
+            <div className="col-auto me-1 mt-3">
                 <Button 
                     className="mt-1"
                     type="submit" 
@@ -102,7 +102,7 @@ function ArbolesPaso4({varAnalizar, displayTable}) {
        
         {/* Matriz de Clasificación */}  
         <br></br>
-        <h4>Matriz de clasificación: Árbol de decisión</h4>
+        <h4>Matriz de clasificación: Bosques Aleatorios Clasificación</h4>
         <br></br>
         <Table className="table table-striped-columns" style={{width: "400px", margin: "auto"}}>
               <thead className="table-light">
@@ -131,7 +131,7 @@ function ArbolesPaso4({varAnalizar, displayTable}) {
         )}
 
       <br></br>
-      <ArbolesPaso5
+      <BosquesPaso5
         varAnalizar = {varAnalizar}
         displayPronostico = {displayPronostico}
       />
@@ -139,4 +139,4 @@ function ArbolesPaso4({varAnalizar, displayTable}) {
   );
 }
 
-export {ArbolesPaso4};
+export {BosquesPaso4};
