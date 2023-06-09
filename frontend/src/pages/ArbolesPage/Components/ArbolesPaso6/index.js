@@ -74,7 +74,7 @@ function ArbolesPaso6({varAnalizar, displayPronostico}) {
 
         )}
 
-        {(displayPronostico) && (
+        {(displayPronostico && !displayCurva) && (
         <>
           {/* Formulario */}
           <form onSubmit={handleSubmit(onSubmit)} className="row">

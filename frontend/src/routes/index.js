@@ -1,8 +1,9 @@
 
-import {MdTravelExplore } from "react-icons/md"
-import {CgComponents} from "react-icons/cg"
-import {VscListTree} from "react-icons/vsc"
-import {MdOutlineForest} from "react-icons/md";  
+import {MdTravelExplore } from "react-icons/md";
+import {CgComponents} from "react-icons/cg";
+import {VscListTree} from "react-icons/vsc";
+import {MdOutlineForest} from "react-icons/md"; 
+import {GrCluster} from "react-icons/gr";
 
 export const routesApp = [
     {
@@ -24,5 +25,10 @@ export const routesApp = [
       icon: <MdOutlineForest/>,
       to: '/bosques',
       text: ' Bosques Aleatorios Clasificación'
+    },
+    {
+      icon: <GrCluster/>,
+      to: '/clusters',
+      text: ' Clustering Particional y Clasificación'
     },
   ];

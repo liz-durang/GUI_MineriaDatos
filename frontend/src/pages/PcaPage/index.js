@@ -7,6 +7,7 @@ import { PcaPaso2 } from "./Components/PcaPaso2";
 import { PcaPaso3y4 } from "./Components/PcaPaso3y4";
 import { PcaPaso6} from "./Components/PcaPaso6";
 import {CgComponents} from "react-icons/cg"
+import componentes from '../../assets/componentes.png';
 
 function PcaPage() {
 
@@ -20,6 +21,11 @@ function PcaPage() {
         <hr></hr>
         <br></br>
         <p>El análisis de componentes principales (ACP o PCA, Principal Component Analysis) es un algoritmo para reducir la cantidad de variables de conjuntos de datos, mientras se conserva la mayor cantidad de información posible.</p>
+
+        <div className="imgPages mb-3 mt-3">
+          <img src={componentes} className="img-fluid" alt="componentes principales"/>
+        </div>
+
 
         <PcaPaso0/>
         <br></br><br></br>

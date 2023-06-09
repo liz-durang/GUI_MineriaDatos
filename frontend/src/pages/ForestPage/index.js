@@ -2,6 +2,7 @@ import React from "react";
 
 import {MdOutlineForest} from "react-icons/md";  
 import { BosquesPaso0 } from "./Components/BosquesPaso0";
+import forest from '../../assets/bosques.png';
 
 function ForestPage() {
   return (
@@ -17,7 +18,9 @@ function ForestPage() {
             un modelo generalizado con el objetivo de reducir la tendencia al sobreajuste.</p>
         <p>Es uno de los algoritmos de aprendizaje automático más usados en la actualidad</p>
 
-      
+        <div className="imgPages mb-4 mt-2">
+          <img src={forest} className="img-fluid" alt="bosques aleatorios"/>
+        </div>
       
       <BosquesPaso0/>
 
@@ -38,6 +41,8 @@ function ForestPage() {
            <li className="indice-item">Paso 4: Creación del modelo</li>
           <br></br>
            <li className="indice-item">Paso 5: Reporte de clasificación</li>
+           <br></br>
+           <li className="indice-item">Paso 6: Validar con la curva ROC</li>
         </ul>
       </div>
       

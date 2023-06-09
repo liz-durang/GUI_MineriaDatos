@@ -3,17 +3,15 @@ import React from "react";
 import { instance } from "../../../Axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { BosquesPaso2 } from "../BosquesPaso2";
-import { BosquesPaso3 } from "../BosquesPaso3";
-import { BosquesPaso4 } from "../BosquesPaso4";
 
 import Button from "react-bootstrap/esm/Button";
 import Table from "react-bootstrap/esm/Table";
+import { ClusterPaso2 } from "../ClusterPaso2";
 
 
-function BosquesPaso11() {
+function ClusterPaso11() {
   
-  const baseURL = '/forest/analysis?variable='
+  const baseURL = '/cluster/analysis?variable='
   const [description, setDescription] = useState([]);
   const [headerDescription, setHeaderDescription] = useState([]);
   const [size, setSize] = useState([]);
@@ -82,8 +80,7 @@ function BosquesPaso11() {
 
   return (
     <>
-        <p>Ingresa el nombre de la variable que se va a analizar.</p> 
-        <p>Consulta con doble clic</p>
+        <p>Ingrese el nombre de la variable que se va a agrupar:</p>
 
         {/* Formulario */}
         <form onSubmit={handleSubmit(onSubmit)} className="row">
@@ -91,7 +88,7 @@ function BosquesPaso11() {
                 <input
                     className="form-control mt-1"
                     type="text"
-                    placeholder="Outcome"
+                    placeholder="BMI"
                     {...register('variable', {
                         required: true
                     })}
@@ -111,12 +108,15 @@ function BosquesPaso11() {
         <br></br><br></br>
         {displayTable && (
         <> 
-          {/* Valores de la variable */}
           
-          <Table bordered style={{width: "300px", margin: "auto"}}>
+          {/* Valores agrupados de la variable */}
+        
+          <p>Valores agrupados de la variable</p>
+          <div className="table-responsive" style={{width: "50%", height: "52vh", margin: "auto"}}>
+          <Table className="table table-striped-columns">
             <thead>
             <tr>
-                <th colSpan={2} className="text-center">Variable a agrupar</th>
+                <th colSpan={2} className="text-center">{varAnalizar}</th>
               </tr>
               <tr>
                 <th>Valores</th>
@@ -129,17 +129,17 @@ function BosquesPaso11() {
                   {item.map((it, llave) => (
                     <td key={llave}>{it}</td>
                   ))}
-                  
-                  
+
                 </tr>
               ))}
             </tbody>
           </Table>
+          </div>
 
           {/* Descripcion de la variable */}
           <br></br>
           <p>Descripción de la variable</p>
-          <div className="table-responsive" style={{width: "100%", height: "52vh"}}>
+          <div className="table-responsive mb-3" style={{width: "100%", height: "52vh"}}>
           <Table className="table table-striped-columns">
               <thead className="table-light">
                 <tr>
@@ -169,22 +169,14 @@ function BosquesPaso11() {
 
         )}
 
-      <br></br>
-      <BosquesPaso2/>
-      <br></br>
-      <BosquesPaso3
-        varAnalizar = {varAnalizar}
-        displayTable = {displayTable}
-        variables = {variables}
+      <ClusterPaso2
+        displayTable={displayTable}
       />
-      <br></br>
-      <BosquesPaso4
-        varAnalizar = {varAnalizar}
-        displayTable = {displayTable}
-      />      
-      <br></br>
+
+      
+
     </>
   );
 }
 
-export {BosquesPaso11};
+export {ClusterPaso11};

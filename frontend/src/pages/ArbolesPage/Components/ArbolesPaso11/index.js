@@ -126,8 +126,6 @@ function ArbolesPaso11() {
                   {item.map((it, llave) => (
                     <td key={llave}>{it}</td>
                   ))}
-                  
-                  
                 </tr>
               ))}
             </tbody>

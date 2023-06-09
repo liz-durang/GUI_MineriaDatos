@@ -1,8 +1,7 @@
 import React from "react";
 import { ArbolesPaso0 } from "./Components/ArbolesPaso0";
-
-
 import {VscListTree} from "react-icons/vsc";  
+import arboles from '../../assets/arboles.png';
 
 function ArbolesPage() {
   return (
@@ -20,9 +19,17 @@ function ArbolesPage() {
         <p>Su objetivo es construir una estructura jerárquica eficiente y escalable que divide los datos en función de determinadas condiciones. 
             Para esto se utiliza la estrategia: divide y vencerás.
         </p>
+
+        <br></br>
+
+        <div className="imgPages mb-4 mt-2">
+          <img src={arboles} className="img-fluid" alt="árboles de decisión"/>
+        </div>
+
+        <br></br>
+        
       
-      
-      <ArbolesPaso0/>
+        <ArbolesPaso0/>
 
       </main>
 
@@ -41,6 +48,8 @@ function ArbolesPage() {
            <li className="indice-item">Paso 4: Creación del modelo</li>
           <br></br>
            <li className="indice-item">Paso 5: Reporte de clasificación</li>
+           <br></br>
+           <li className="indice-item">Paso 6: Validar con la curva ROC</li>
         </ul>
       </div>
       

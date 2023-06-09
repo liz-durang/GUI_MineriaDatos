@@ -27,8 +27,8 @@ function EdaPage() {
           <img src={eda} className="img-fluid" alt="analisis exploratorio de datos"/>
         </div>
 
+        <br></br>
   
-        <br></br><br></br>
           <EdaPaso0
             
           />

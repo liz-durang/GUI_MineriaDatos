@@ -59,7 +59,47 @@ def standarize():
     """
     Regresa los datos estandarizados.
     """
-    data = cluster.standarize()
+    data = cluster.get_standarize()
     response = dataframe_to_dict(data)
 
     return response
+
+@router.get("/get-elbow-method")
+def get_elbow_method():
+    """
+    Definición de k clusters para K-means
+    """
+    index, SSE = cluster.get_elbow_method()
+    response = {
+        'index': index,
+        'k': SSE
+    }
+
+    return response
+
+@router.get("/create-labels")
+def create_label():
+    """
+    Etiquetas y elementos por cluster
+    """
+    data, elements = cluster.create_labels()
+    response = {
+        'labels': dataframe_to_dict(data),
+        'elementos': dataframe_to_dict(elements)
+    }
+    return response
+
+
+@router.get("/inspect-cluster")
+def inspect_cluster(variable: str):
+    """
+    Inspeccionar un cluster
+    """
+    inspected, centroidesP = cluster.inspect_cluster(variable)
+    response = {
+        'inspected': dataframe_to_dict(inspected),
+        'centroidesP': dataframe_to_dict(centroidesP),
+
+    }
+    return response
+

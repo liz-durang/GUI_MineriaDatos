@@ -26,7 +26,7 @@ export const HambugerButton = styled.div`
         position: fixed;
         top: 2vh;
         right: 3vw;
-          
+        z-index: 6;
     }
     
 

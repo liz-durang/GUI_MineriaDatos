@@ -22,7 +22,7 @@ function Menu() {
 
   return (
     <>
-      <NavSide className="p-4 navSide" click={click} >
+      <NavSide className="p-4 navSide" click={click} style={{overflow: "scroll"}}>
           <h3 className="fw-bold fs-5 mb-2">Home</h3>
           <NavLink
               key='/'
