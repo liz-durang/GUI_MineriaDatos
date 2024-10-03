@@ -1,6 +1,6 @@
 # GUI_MineriaDatos
 
-GUI de proposito general para Mineria de Datos
+GUI de proposito general para Algoritmos de Mineria de Datos
 
 ## Getting Started
 
